@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OVO99 Bonus Claim</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      color: #0056ff;
+      margin-top: 20px;
+    }
+    .status {
+      margin: 10px 0;
+      font-size: 18px;
+    }
+    .status span {
+      color: red;
+      font-weight: bold;
+    }
+    .deposit-box {
+      border: 2px solid #cce0ff;
+      border-radius: 10px;
+      padding: 15px;
+      width: 80%;
+      max-width: 350px;
+      margin: 20px auto;
+      background: #f8fbff;
+      animation: fallSlow 3s ease-out; /* animasi jatuh selow */
+    }
+    .deposit-box h3 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+    }
+    .deposit-box h3 .emoji {
+      display: inline-block;
+      animation: moveEmoji 1.5s infinite alternate ease-in-out;
+    }
+    .deposit-box p {
+      background: #e6f0ff;
+      padding: 10px;
+      border-radius: 8px;
+      text-align: left;
+      margin: 8px 0;
+    }
+    .btn {
+      background: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+    .btn:hover {
+      background: #0056b3;
+    }
+    .online {
+      color: #0056ff;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    /* Popup custom */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff0f0;
+      border: 2px solid red;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      z-index: 1000;
+      text-align: center;
+      width: 80%;
+      max-width: 350px;
+    }
+    .popup p {
+      color: red;
+      font-weight: bold;
+      font-size: 16px;
+    }
+    .popup button {
+      margin-top: 15px;
+      background: red;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    /* Animasi jatuh selow */
+    @keyframes fallSlow {
+      0% {
+        transform: translateY(-100vh);
+        opacity: 0;
+      }
+      60% {
+        transform: translateY(30px);
+        opacity: 1;
+      }
+      80% {
+        transform: translateY(-10px);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    /* Animasi emoji gerak kanan kiri */
+    @keyframes moveEmoji {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(10px); }
+    }
+  </style>
+</head>
+<body>
+  <h1>OVO99 BONUS CLAIM</h1>
+  <div class="status">
+    --SETATUS-- <br>
+    <span>AKUN TERKUNCI</span>
+  </div>
+  <p>silahkan deposit dahulu bos ku, agar akun nya bisa kembali normal, salam hangat bos ku dari ovo99official</p>
+
+  <div class="deposit-box">
+    <h3>
+      <span class="emoji">⚡</span>
+      Tujuan Deposit
+      <span class="emoji">⚡</span>
+    </h3>
+    <p><b>Jenis Rekening:</b> Dana</p>
+    <p><b>Nama Rekening:</b> putry63</p>
+    <p><b>No Rekening:</b> 0831-9488-7061</p>
+    <p><b>Jumlah Deposit:</b> Rp100.000</p>
+    <div class="online">ONLINE</div>
+  </div>
+
+  <button class="btn" onclick="showPopup()">Buka Kunci Akun</button>
+
+  <!-- Popup -->
+  <div class="popup" id="popup">
+    <p>"Maaf bos ku, silahkan deposit dahulu agar sistem bisa konfirmasi deposit anda."</p>
+    <button onclick="closePopup()">Tutup</button>
+  </div>
+
+  <script>
+    function showPopup() {
+      document.getElementById("popup").style.display = "block";
+    }
+    function closePopup() {
+      document.getElementById("popup").style.display = "none";
+    }
+  </script>
+</body>
+</html>
