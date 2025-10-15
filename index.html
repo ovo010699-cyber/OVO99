@@ -3,515 +3,395 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Database OVO99 - Informasi Akun (Kompak)</title>
+    <title>Dashboard Transaksi OVO99 Profesional - Kedip Halus</title>
     <style>
-        /* ====================================
-           1. CSS Tampilan Utama
-           ==================================== */
+        /* TEMA WARNA MERAH */
+        :root {
+            --color-primary-red: #cc0000; /* Merah Maron Gelap */
+            --color-primary-blue: #007bff; /* Biru Primer untuk judul (tidak terpakai lagi untuk judul utama) */
+            --color-secondary: #f4f4f4; /* Abu-abu Sangat Terang */
+            --color-text-dark: #2c3e50; /* Biru Tua/Hitam untuk Teks */
+            --color-highlight: #ff6b6b; /* Merah Cerah untuk Aksen */
+            --color-bg-soft: #fcfcfc;
+            --color-bg-body: #e9eff4;
+            /* Warna untuk judul utama: Hitam dengan kedipan halus */
+            --color-main-title: #222222; /* Hitam pekat */
+            --color-main-title-fade: #444444; /* Abu-abu gelap untuk kedipan */
+        }
+
+        /* BASE STYLING */
         body {
-            font-family: 'Roboto', 'Arial', sans-serif;
-            background-color: #121212; 
-            color: #e0e0e0; 
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--color-bg-body); 
+            color: var(--color-text-dark);
             margin: 0;
-            padding: 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .container {
-            width: 100%;
-            max-width: 400px; 
-            background-color: #1e1e1e; 
-            padding: 25px; 
-            border-radius: 10px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
-            border: 1px solid #333;
-            position: relative; 
-        }
-        .main-title { 
-            color: #bb86fc; 
-            text-align: center;
-            margin-bottom: 20px; 
-            font-size: 1.5em; 
-            font-weight: 500;
-        }
-        .card {
-            background-color: #2c2c2c;
-            padding: 15px; 
-            margin-bottom: 10px; 
-            border-radius: 6px;
-            border-left: 4px solid #03dac6; 
-        }
-        .card-title {
-            font-size: 0.8em; 
-            color: #a0a0a0;
-            margin-bottom: 3px;
-            font-weight: 300;
-        }
-        .card-content {
-            font-size: 1.1em; 
-            font-weight: bold;
-            color: #ffffff;
-        }
-        .status {
-            color: #cf6679; 
-            font-size: 1.1em; 
-            font-weight: bold;
-        }
-        .balance-card {
-            background-color: #373737;
-            padding: 20px; 
-            text-align: center;
-            margin: 15px 0;
-            border-radius: 8px;
-            border: 1px solid #444;
-        }
-        .balance-value {
-            font-size: 2em; 
-            font-weight: 700;
-            color: #03dac6; 
-            display: block;
-            margin-top: 3px;
-        }
-        #realtime-clock {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 0.8em; 
-            color: #888;
-            padding: 8px;
-            border-top: 1px dashed #333;
-        }
-        .actions {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 25px;
-            margin-bottom: 10px; 
-        }
-        .actions button {
-            width: 48%;
-            padding: 10px 0; 
-            border: none;
-            border-radius: 5px;
-            font-size: 0.9em; 
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-        }
-        .deposit-btn {
-            background-color: #03dac6; 
-            color: #121212;
-        }
-        .deposit-btn:hover {
-            background-color: #03a89e;
-        }
-        .unlock-btn {
-            background-color: #bb86fc; 
-            color: #121212;
-        }
-        .unlock-btn:hover {
-            background-color: #9858e6;
-        }
-        
-        /* CSS TOMBOL LOGIN BARU */
-        .login-btn {
-            width: 100%; 
-            padding: 12px 0;
-            border: none;
-            border-radius: 5px;
-            font-size: 1em;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-            margin-top: 15px; 
-            background-color: #4CAF50; 
-            color: #121212;
-        }
-        .login-btn:hover {
-            background-color: #45a049;
-        }
-        
-        /* ====================================
-           1.1. CSS BARU UNTUK GIF DI ATAS (SEBAGAI LOGO)
-           ==================================== */
-        .header-gif {
-            display: block; 
-            width: 100%; 
-            max-width: 150px; 
-            height: auto;
-            margin: 0 auto 10px auto; 
-            border-radius: 5px;
-        }
-
-        /* ====================================
-           2. CSS Custom Modal/Pop-up
-           ==================================== */
-        .modal {
-            display: none; 
-            position: fixed; 
-            z-index: 1000; 
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.7); 
-            backdrop-filter: blur(3px); 
-            justify-content: center;
-            align-items: center;
-        }
-        .modal-content {
-            background-color: #ffffff; 
-            color: #121212;
-            padding: 20px;
-            border-radius: 8px;
-            width: 80%;
-            max-width: 300px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-            animation: fadeIn 0.3s;
-            position: relative; 
-        }
-        .modal-title {
-            font-size: 1.1em;
-            font-weight: bold;
-            margin-bottom: 10px;
-            border-bottom: 1px solid #ccc;
-            padding-bottom: 5px;
-        }
-        .modal-body p {
-            margin: 5px 0;
-        }
-        .modal-actions {
-            text-align: right; 
-            margin-top: 15px;
-        }
-        .modal-actions button {
-            background-color: transparent;
-            color: #03a9f4; 
-            border: none;
-            padding: 8px 15px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        
-        /* CSS untuk Tombol Salin di Modal Deposit */
-        #copyBtn {
-            background-color: #03dac6 !important; 
-            color: #121212;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        #copyBtn:hover {
-            background-color: #03a89e !important;
-        }
-        
-        /* ====================================
-           3. CSS Tulisan "Online" Berkedip 
-           ==================================== */
-        .online-status {
-            display: block;
-            text-align: center;
-            margin-top: 10px;
-            font-size: 1em;
-            font-weight: bold;
-            color: #03a9f4; 
-            animation: blinker 2s linear infinite; 
-        }
-        
-        /* ====================================
-           4. CSS Tanggal & Waktu di Modal 
-           ==================================== */
-        #deposit-time-display {
-            display: block;
-            text-align: center;
-            margin-top: 15px;
-            padding-top: 10px;
-            border-top: 1px dashed #ccc;
-            font-size: 0.9em;
-            font-weight: bold;
-            color: #d32f2f; 
-        }
-
-        /* CSS untuk Teks Menunggu Pembayaran */
-        .waiting-payment-text {
-            display: block;
-            text-align: center;
-            margin: 15px 0; 
-            padding: 5px;
-            background-color: #fff3e0; 
-            border-radius: 4px;
-            font-size: 1em;
-            font-weight: bold;
-            color: #ff9800; 
-        }
-
-        /* CSS BARU: Teks Instruksi di Keterangan Penguncian */
-        .instruction-text {
-            display: block;
-            font-size: 0.9em;
-            font-weight: bold;
-            color: #4CAF50; 
-            margin-top: 5px;
-        }
-        
-        @keyframes blinker {
-            50% { opacity: 0; } 
-        }
-
-        /* ====================================
-           5. CSS Modal Peringatan
-           ==================================== */
-        #alertModal .modal-content { 
-             background-color: #ffcccc;
-             padding-bottom: 40px; 
-        }
-        #alertModal .modal-title { 
-            color: #d32f2f; 
-            border-bottom: 1px solid #ffaa99; 
-        }
-        #alertModal .modal-actions button { 
-            color: #d32f2f; 
-        }
-        
-        /* CSS TEKS BARU DI POJOK KIRI BAWAH */
-        .alert-footer-text {
-            position: absolute;
-            bottom: 15px;
-            left: 20px;
-            font-size: 0.75em;
-            color: #757575; 
-        }
-        
-        @keyframes fadeIn {
-            from {opacity: 0; transform: scale(0.95);}
-            to {opacity: 1; transform: scale(1);}
-        }
-
-        /* ====================================
-           6. CSS Ticker Penarikan Berjalan (BARU)
-           ==================================== */
-        .withdrawal-ticker-area {
-            margin-top: 20px;
             padding: 10px;
-            background-color: #004d40; 
-            border-radius: 5px;
-            overflow: hidden; 
-            white-space: nowrap; 
-            box-shadow: 0 0 10px rgba(0, 220, 150, 0.4);
-            max-width: 400px; 
-        }
-        #withdrawalTicker {
-            display: inline-block;
-            color: #ffffff;
-            font-size: 0.85em;
-            font-weight: 500;
-            padding-left: 100%; 
-            animation: tickerScroll 30s linear infinite; 
-            margin: 0;
+            transition: background-color 0.3s;
         }
 
-        @keyframes tickerScroll {
-            to {
-                transform: translate3d(-100%, 0, 0);
+        /* CONTAINER & CARD STYLING */
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 20px auto;
+            background-color: var(--color-bg-soft);
+            padding: 30px; 
+            border-radius: 12px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15); 
+            border-top: 5px solid var(--color-primary-red); 
+        }
+
+        /* HEADER & DATE STYLING */
+        .header {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ddd;
+        }
+        .real-time-date {
+            font-size: 1em;
+            font-weight: 700;
+            color: var(--color-primary-red); 
+            padding: 8px 12px;
+            background-color: #fcebeb; 
+            border-radius: 8px;
+            margin-top: 10px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* JUDUL STYLING & ANIMASI KEDIP HITAM HALUS */
+        .title-group {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .main-title {
+            font-size: 2.2em; 
+            font-weight: 900;
+            color: var(--color-main-title); /* Warna Teks Utama: Hitam */
+            margin: 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1); /* Bayangan teks sedikit */
+            animation: black-fade-slow 3s infinite alternate ease-in-out; /* Animasi Kedip Hitam Sangat Halus */
+        }
+        
+        /* Animasi Kedip Hitam Sangat Halus */
+        @keyframes black-fade-slow {
+            0% { 
+                color: var(--color-main-title); /* Hitam pekat */
+                text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
             }
+            100% { 
+                color: var(--color-main-title-fade); /* Abu-abu gelap */
+                text-shadow: 0 0 0 rgba(0,0,0,0); /* Bayangan hilang saat memudar */
+            }
+        }
+        
+        /* SERVER ONLINE TEXT (BERKEDIP LAMBAT) */
+        .server-status {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: var(--color-primary-red);
+            margin-top: 5px;
+            animation: slow-blink 2s infinite alternate; /* Animasi kedip lambat: 2 detik */
+        }
+
+        /* ANIMASI KEDIP LAMBAT (untuk server status) */
+        @keyframes slow-blink {
+            0% { opacity: 1; }
+            100% { opacity: 0.3; } /* Berkedip ke transparansi 30% */
+        }
+
+
+        /* NAVIGASI & TOMBOL STYLING */
+        .navigation {
+            display: flex;
+            justify-content: center;
+            gap: 15px; 
+            margin-bottom: 25px;
+            flex-wrap: wrap; 
+        }
+        .nav-btn {
+            padding: 12px 20px; 
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9em; 
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .btn-primary { 
+            background-color: var(--color-primary-red); 
+            color: white; 
+        }
+        .btn-primary:hover { 
+            background-color: #a00000; 
+            transform: translateY(-2px);
+        }
+        .btn-secondary { 
+            background-color: var(--color-highlight); 
+            color: white; 
+        }
+        .btn-secondary:hover { 
+            background-color: #ff4757; 
+            transform: translateY(-2px);
+        }
+        .btn-info { 
+            background-color: var(--color-secondary); 
+            color: var(--color-text-dark);
+            border: 1px solid #ddd;
+        }
+        .btn-info:hover { 
+            background-color: #e0e0e0; 
+            transform: translateY(-2px);
+        }
+
+        /* DATA INFO */
+        .data-info {
+            font-style: italic;
+            color: var(--color-primary-red);
+            margin-bottom: 5px;
+            padding-left: 0;
+            font-size: 1em;
+            font-weight: bold;
+        }
+
+        /* TABEL STYLING */
+        .table-container {
+            max-height: 550px; 
+            overflow-y: auto; 
+            overflow-x: auto; 
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 15px; 
+            text-align: left;
+            border-bottom: 1px solid #eee;
+            white-space: nowrap; 
+            font-size: 0.95em; 
+        }
+        th {
+            background-color: var(--color-primary-red);
+            color: white;
+            font-weight: 700;
+            text-transform: uppercase;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        tr:nth-child(even) { background-color: #f7f7f7; }
+        tr:hover { background-color: #ffeaea; cursor: pointer; }
+        
+        .amount-cell {
+            font-weight: 700;
+            color: #008000; 
+        }
+        
+        .id-pengguna-cell {
+            font-weight: 700;
+            color: var(--color-text-dark);
+            font-style: normal;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        
-        <img src="mguPwiip.gif" alt="" class="header-gif">
-
-        <p class="main-title">DATA BASE OVO99</p> 
-
-        <div class="balance-card">
-            <span class="card-title">JUMLAH SALDO SAAT INI</span>
-            <span class="balance-value">Rp 3.440.285.00</span>
-        </div>
-        
-        <div class="card"><p class="card-title">STATUS AKUN</p><p class="card-content"><span class="status">TERKUNCI</span></p></div>
-        <div class="card">
-            <p class="card-title">KETERANGAN PENGUNCIAN</p>
-            <p class="card-content">
-                Klaim bonus tanpa melakukan deposit<br>
-                <span class="instruction-text">Silahkan deposit di bawah agar akun anda NORMAL</span>
-            </p>
-        </div>
-        <div id="realtime-clock">Memuat Waktu...</div>
-
-        <div class="actions">
-            <button class="deposit-btn" onclick="openModal('depositModal')">DEPOSIT</button>
-            <button class="unlock-btn" onclick="openModal('alertModal')">BUKA KUNCI AKUN</button>
-        </div>
-        
-        <button class="login-btn" onclick="window.location.href='https://ovo99i.space/'">KEMBALI LOGIN KE OVO99</button>
-        
-        <div class="withdrawal-ticker-area">
-            <p id="withdrawalTicker"></p>
-        </div>
-
+<div class="dashboard-container">
+    
+    <div class="title-group">
+        <h1 class="main-title">DATA BASE OVO99 - TRANSAKSI PENARIKAN</h1> 
+        <div class="server-status">SERVER ONLINE 🟢</div>
     </div>
 
-    <div id="depositModal" class="modal">
-      <div class="modal-content">
-        <div class="modal-title">TUJUAN DEPOSIT</div>
-        <div class="modal-body">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                <p style="margin: 0;">Nomor: <span id="depositNumber">0831-9488-7061</span></p>
-                <button id="copyBtn">SALIN</button>
-            </div>
-            
-            <p>Metode: <span id="depositMethod">Dana</span></p>
-            
-            <span class="waiting-payment-text">⏳ --menunggu pembayaran-- ⏳</span> 
-
-            <span class="online-status">ONLINE</span>
-            <span id="deposit-time-display">Memuat Tanggal & Waktu...</span>
-        </div>
-        <div class="modal-actions">
-          <button onclick="closeModal('depositModal')">OKE</button>
-        </div>
-      </div>
+    <div class="header">
+        <div class="data-info" id="dataCountInfo" style="color: var(--color-primary-red);"></div>
+        <div id="currentDateTime" class="real-time-date">Memuat Tanggal...</div>
     </div>
-
-    <div id="alertModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-title">PERHATIAN</div>
-            <div class="modal-body">
-                <p style="color: #d32f2f; font-weight: bold; text-align: center;">
-                    MAAF BOS KU,<br>ANDA BELUM DEPOSIT.<br>SILAHKAN DEPOSIT DAHULU AGAR BISA LOGIN.
-                </p>
-            </div>
-            <div class="modal-actions">
-                <button onclick="closeModal('alertModal')">OKE</button>
-            </div>
-            
-            <span class="alert-footer-text">Silahkan Deposit Dahulu</span>
-        </div>
+    
+    <div class="navigation">
+        <button class="nav-btn btn-primary" onclick="alert('Membuka Cek Deposit Member...')">Cek Deposit Member</button>
+        <button class="nav-btn btn-secondary" onclick="alert('Membuka Cek Withdraw...')">Cek Withdraw</button>
+        <button class="nav-btn btn-secondary" onclick="alert('Membuka Bukti Transaksi...')">Bukti Transaksi</button>
+        <button class="nav-btn btn-info" onclick="populateData(710)">Reload Data (710 Transaksi)</button>
     </div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>ID Transaksi</th>
+                    <th>ID Pengguna</th>
+                    <th>Jumlah Penarikan</th>
+                    <th>Waktu</th>
+                </tr>
+            </thead>
+            <tbody id="dataRows">
+                </tbody>
+        </table>
+    </div>
+    
+</div>
 
-    <script>
-        // Fungsi untuk mengontrol modal
-        function openModal(modalId) {
-            document.getElementById(modalId).style.display = 'flex';
-            if (modalId === 'depositModal') {
-                updateDepositClock();
+<script>
+    // Set untuk menyimpan ID Pengguna yang sudah digunakan
+    const usedIDs = new Set();
+    // Daftar nama yang sama dari kode sebelumnya (memastikan keunikan ID Pengguna tetap terjaga)
+    const uniqueNames = [
+        "Putri", "Rizky", "Dian", "Agus", "Siti", "Bagus", "Laras", "Yoga", "Cinta", "Eko", "Maya", "Fahri", "Gina", "Hadi", 
+        "Intan", "Jaya", "Kiki", "Lani", "Miko", "Nia", "Oman", "Puji", "Qori", "Rina", "Soni", "Titi", "Umar", "Vina", 
+        "Wawan", "Yanti", "Zaki", "Aini", "Bayu", "Cici", "Dodo", "Eni", "Fino", "Gita", "Hendra", "Indah", "Joko", "Karin",
+        "Lukman", "Melly", "Nanda", "Oki", "Pita", "Rahmat", "Shinta", "Tegar", "Umi", "Vicky", "Wulan", "Yuda", "Zahra",
+        "Ayu", "Bimo", "Cindy", "Denny", "Elisa", "Fajar", "Gaby", "Harry", "Ira", "Jimmy", "Krisna", "Lita", "Marco", 
+        "Nuri", "Owen", "Panca", "Risa", "Samuel", "Tara", "Ulin", "Velo", "Wira", "Yeni", "Zian", "Adam", "Bella", 
+        "Cakra", "Dewi", "Erick", "Fitri", "Gilang", "Hesti", "Iqbal", "Jerry", "Kania", "Leo", "Mila", "Nino", "Ocha",
+        "Piko", "Restu", "Silvi", "Tio", "Ucok", "Vita", "Wisnu", "Yola", "Zico", "Alif", "Benny", "Clara", "Dede",
+        "Elang", "Farah", "Gerry", "Hilda", "Irfan", "Juli", "Koko", "Lulu", "Maman", "Nina", "Ozy", "Peri", "Rian",
+        "Siska", "Taufik", "Ulan", "Vano", "Wanda", "Yunus", "Zaza", "Aldo", "Bebi", "Cesar", "Dani", "Elsa", "Ferry",
+        "Gani", "Heidi", "Iwan", "Joni", "Kamil", "Lena", "Mona", "Noni", "Orel", "Patra", "Reno", "Santi", "Toni", 
+        "Udin", "Vera", "Wiko", "Yenni", "Zidan", "Abdi", "Bulan", "Candra", "Daffa", "Elma", "Fendi", "Gaga", "Hani",
+        "Imam", "Jihan", "Kurnia", "Lia", "Marsha", "Nova", "Opan", "Pipin", "Rio", "Sari", "Tegar", "Ucok", "Vino",
+        "Wahyudi", "Yuli", "Zul", "Akbar", "Cahyo", "Dimas", "Eka", "Fira", "Gugun", "Husna", "Icha", "Jefri", "Kino",
+        "Lita", "Mamat", "Nabila", "Ozy", "Piko", "Roni", "Siska", "Tino", "Umar", "Vera", "Widi", "Yuni", "Zack",
+        "Asep", "Bima", "Cikal", "Dina", "Elif", "Fajar", "Ganes", "Hana", "Iwan", "Jasmine", "Kaleb", "Lala", "Musa",
+        "Niken", "Opik", "Pricilla", "Rudy", "Sakti", "Tania", "Ubay", "Vino", "Widiya", "Yayan", "Zulfan",
+        "Arif", "Bianca", "Chandra", "Doni", "Endah", "Ferdi", "Guruh", "Hasna", "Ilham", "Juwita", "Kevin", "Lana",
+        "Melati", "Nurul", "Oktar", "Pandu", "Ratih", "Salman", "Tiara", "Ucok_A", "Vania", "Wira", "Yusuf", "Zain",
+        "Asih", "Bagus_A", "Chairul", "Dwi_B", "Erlina", "Fikri", "Guntur", "Hanny", "Imran", "Juwita_B", "Kunto", "Laksmi",
+        "Mira", "Novi", "Obi", "Pratiwi", "Rian_A", "Shela", "Tulus", "Ucup", "Vino_A", "Wulan_A", "Yusuf_A", "Zaki_A",
+        "Andi", "Bobby", "Citra_A", "Dedi", "Eva", "Fendi_A", "Galih", "Herman", "Ida", "Julian", "Kusuma", "Lina_A",
+        "Maman_A", "Narti", "Okky", "Purnama", "Rian_B", "Susi", "Tomy", "Ujang", "Vivi_A", "Wawan_A", "Yulia", "Zulfa_A",
+        "Anto", "Brenda", "Ciko", "Donny", "Endang", "Faisal", "Gusti", "Hasan", "Irfan", "Juwita_C", "Kurniawan", "Larasati",
+        "Meli", "Nizar", "Ojak", "Putra", "Risa", "Santi_A", "Taufan", "Udin_A", "Vivi_B", "Wahyu", "Yanto", "Zia",
+        "Ardi", "Bowo", "Cinta", "Della", "Elvira", "Fitra", "Gatot", "Helmi", "Inez", "Joni_A", "Kartika", "Lela",
+        "Miftah", "Nugroho", "Olan", "Permata", "Rizka", "Siti", "Tito", "Ujang_B", "Vera", "Wira_A", "Yeyen", "Zulham",
+        "Ari", "Bunga", "Cipta", "Dian_A", "Elsa", "Fahmi_A", "Gita", "Herman_A", "Iman", "Juwita_D", "Kiki_A", "Lina_B",
+        "Momo", "Ningsih", "Opa", "Putu", "Rahma", "Sony", "Tuti", "Ujang_C", "Vito", "Wulan_B", "Yuni", "Zacky",
+        "Asri_A", "Bowo_A", "Candra_A", "Dwi_C", "Ega", "Fauzi", "Gusti_A", "Hari", "Icha", "Joko_A", "Kartini", "Lila",
+        "Monica", "Nova", "Okky_A", "Puspa", "Rudi", "Sinta", "Teguh", "Ucok_B", "Vino_B", "Wawa", "Yusuf_B", "Zul_A",
+        "Aam", "Aan", "Abi", "Achmad", "Adel", "Adit", "Adnan", "Afif", "Ageng", "Aji", "Akmal", "Alia", "Amel", "Amin", "Ami", "Amir", "Andre", "Angga", "Ani", "Anisa", "Arifin", "Asih_B", "Asri_B", "Atik", "Aura", 
+        "Bakti", "Banu", "Bebi_A", "Beni", "Bintang", "Bob", "Boy", "Brata", "Cahya", "Carla", "Chandra_B", "Chika", "Cici_A", "Cindy", "Dafa", "Damon", "Dana", "Dedi_A", "Dian_B", "Didit", "Dinda_A", "Dini", "Doni_A", "Dudi", 
+        "Edi", "Ega_A", "Egi", "Elina", "Ella", "Emi", "Emon", "Eri", "Erni", "Esti", "Fadli", "Fajar_A", "Fani", "Faris", "Fendi_B", "Fifi", "Fina", "Fira", "Gandi", "Gani", "Gatot_A", "Geri", "Ghani", "Gilar", 
+        "Hafiz", "Halim", "Hana_A", "Hani_A", "Hanna", "Hardi", "Heri", "Huda", "Ilma", "Imron", "Indra", "Ira_A", "Irma", "Irvan", "Ita", "Ivan", "Jaja", "Jamal", "Jati", "Jihan_A", "Jojo", "Joko_B", "Juli_A", "Julius", 
+        "Kala", "Karim", "Karta", "Kasih", "Kiki_B", "Koko_A", "Kris", "Kukuh", "Laksmi_A", "Lala_A", "Lina_C", "Lita_A", "Lucky", "Madi", "Maimun", "Malik", "Manda", "Marni", "Maulana", "Melia", "Mita", "Momo_A", "Murni", 
+        "Nana", "Nani", "Nata", "Niken_A", "Nisa_A", "Noni_A", "Nopal", "Nunu", "Obi", "Oka", "Okta", "Olan_A", "Ony", "Ovi", "Ozy", "Paijo", "Panji", "Parman", "Pepi", "Permata", "Pika", "Pio", "Puji", "Pungky"
+    ];
+
+    let availableNames = [];
+
+    // --- Bagian Real-Time Date ---
+    function updateDateTime() {
+        const now = new Date();
+        const options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+        document.getElementById('currentDateTime').textContent = now.toLocaleDateString('id-ID', options);
+    }
+    
+    // --- ID Pengguna dengan Nama Manusia Unik ---
+    function generateRandomID() {
+        if (availableNames.length === 0) {
+            availableNames = [...uniqueNames]; 
+            for (let i = availableNames.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [availableNames[i], availableNames[j]] = [availableNames[j], availableNames[i]];
             }
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
-        }
-
-        // FUNGSI BARU: Salin Nomor Deposit
-        document.addEventListener('DOMContentLoaded', () => {
-            const copyButton = document.getElementById('copyBtn');
-            if (copyButton) {
-                copyButton.addEventListener('click', () => {
-                    const depositNumber = document.getElementById('depositNumber').textContent;
-                    
-                    navigator.clipboard.writeText(depositNumber).then(() => {
-                        alert('Nomor deposit berhasil disalin: ' + depositNumber);
-                        copyButton.textContent = 'TER-SALIN!';
-                        setTimeout(() => {
-                            copyButton.textContent = 'SALIN';
-                        }, 2000); 
-                    }).catch(err => {
-                        console.error('Gagal menyalin: ', err);
-                        alert('Gagal menyalin nomor. Silahkan salin manual.');
-                    });
-                });
-            }
-            
-            startWithdrawalTicker(); 
-        });
-
-
-        // Fungsi Jam Utama
-        function updateClock() {
-            const now = new Date();
-            const datePart = now.toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' });
-            const timePart = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
-            
-            document.getElementById('realtime-clock').textContent = datePart + " | Pukul " + timePart + " WIB";
-        }
-
-        // FUNGSI JAM UNTUK MODAL DEPOSIT
-        function updateDepositClock() {
-            const now = new Date();
-            const dateOptions = { day: 'numeric', month: 'long', year: 'numeric' };
-            const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
-            
-            const dateStr = now.toLocaleDateString('id-ID', dateOptions);
-            const timeStr = now.toLocaleTimeString('id-ID', timeOptions);
-
-            document.getElementById('deposit-time-display').textContent = dateStr + " | " + timeStr + " WIB";
         }
         
-        // FUNGSI BARU: Ticker Penarikan Berjalan
-        const commonNames = [
-            "siti", "budi", "agus", "eka", "sri", "rini", "joko", "susan", "diana", "rian", "udin", "rani", 
-            "asep", "dian", "yuni", "yusuf", "indra", "wahyu", "sulis", "andi", "dedi", "eko", "intan", "rizky"
-        ];
+        let namePart = availableNames.pop();
+        namePart = namePart.replace(/_[A-Za-z0-9]+$/, ''); 
+
+        let newID = '';
+        let attempts = 0;
+        const maxAttempts = 710 * 2; 
+
+        do {
+            const number = Math.floor(Math.random() * (999 - 100 + 1)) + 100; 
+            newID = `${namePart}${number}`;
+            attempts++;
+            
+            if (attempts > maxAttempts) {
+                console.error("Gagal membuat ID unik setelah banyak percobaan.");
+                return `FallbackID${Date.now()}`;
+            }
+        } while (usedIDs.has(newID)); 
         
-        function getRandomUsername() {
-            const namePart = commonNames[Math.floor(Math.random() * commonNames.length)];
-            const numPart = Math.floor(Math.random() * 999); 
-            const suffix = ["", "pro", "gacor", "win"][Math.floor(Math.random() * 4)];
-            
-            let username = namePart;
-            const style = Math.floor(Math.random() * 3); 
-            
-            if (style === 0) {
-                username += numPart.toString().padStart(2, '0'); 
-            } else if (style === 1) {
-                username += '_' + numPart.toString().slice(0, 2); 
-            } else {
-                username += suffix; 
+        usedIDs.add(newID); 
+        return newID; 
+    }
+
+    // --- Bagian Jumlah Penarikan Acak (3 Juta - 10 Juta) ---
+    function generateRandomAmount() {
+        const min = 3000000;
+        const max = 10000000;
+        return Math.floor(Math.random() * ((max - min) / 100000)) * 100000 + min;
+    }
+
+    // --- Bagian Waktu Acak (07:00:00 - 23:59:59) ---
+    function generateRandomTime() {
+        const hour = Math.floor(Math.random() * (23 - 7 + 1)) + 7; 
+        const minute = Math.floor(Math.random() * 60);
+        const second = Math.floor(Math.random() * 60);
+
+        const formattedHour = hour.toString().padStart(2, '0');
+        const formattedMinute = minute.toString().padStart(2, '0');
+        const formattedSecond = second.toString().padStart(2, '0');
+        
+        return `${formattedHour}:${formattedMinute}:${formattedSecond}`;
+    }
+
+    // --- Bagian Format Mata Uang ---
+    function formatCurrency(amount) {
+        return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(amount);
+    }
+    
+    // --- Bagian Populate Data (710 Baris) ---
+    function populateData(count = 710) { 
+        const dataRows = document.getElementById('dataRows');
+        const dataCountInfo = document.getElementById('dataCountInfo');
+        const rows = []; 
+        const baseIdTransaksi = 780; 
+        
+        usedIDs.clear(); 
+        availableNames = []; 
+
+        dataRows.innerHTML = '<tr><td colspan="5" style="text-align:center;">Membuat Data Acak Unik...</td></tr>';
+
+        setTimeout(() => {
+            for (let i = 1; i <= count; i++) {
+                const idTransaksi = baseIdTransaksi + i;
+                const idPengguna = generateRandomID(); 
+                const jumlah = generateRandomAmount(); 
+                const waktu = generateRandomTime(); 
+
+                const rowHtml = `
+                    <tr>
+                        <td>${i}</td>
+                        <td>${idTransaksi}</td>
+                        <td class="id-pengguna-cell">${idPengguna}</td>
+                        <td class="amount-cell">${formatCurrency(jumlah)}</td>
+                        <td>${waktu}</td>
+                    </tr>
+                `;
+                rows.push(rowHtml);
             }
             
-            return username;
-        }
+            dataRows.innerHTML = rows.join('');
+            dataCountInfo.textContent = `Total ID Withdraw hari ini ${count} claim bonus`;
+        }, 10);
+    }
 
-        function getRandomWithdrawalMessage() {
-            const randomUsername = getRandomUsername();
-            const min = 3000000;
-            const max = 10000000;
-            const randomAmount = Math.floor((Math.random() * (max - min) + min) / 100000) * 100000;
-            
-            const formattedAmount = "Rp " + randomAmount.toLocaleString('id-ID');
-
-            return `${randomUsername.toUpperCase()} Berhasil Withdraw bonus claim ${formattedAmount} --- `;
-        }
-
-        // Fungsi untuk mengisi dan memulai Ticker
-        function startWithdrawalTicker() {
-            const tickerElement = document.getElementById('withdrawalTicker');
-            let messages = "";
-            const numMessages = 15; 
-
-            for (let i = 0; i < numMessages; i++) {
-                messages += getRandomWithdrawalMessage();
-            }
-
-            tickerElement.textContent = messages;
-            
-            setTimeout(startWithdrawalTicker, 30000); 
-        }
-
-
-        // Memulai interval Jam
-        setInterval(updateClock, 1000);
-        updateClock(); 
-        
-        setInterval(updateDepositClock, 1000);
-    </script>
+    // Inisialisasi
+    updateDateTime();
+    setInterval(updateDateTime, 1000); 
+    populateData(710); 
+</script>
 
 </body>
-</html>
+    </html>
