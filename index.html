@@ -29,7 +29,7 @@
             border: 1px solid #333;
             position: relative; 
         }
-        h1 {
+        .main-title { /* Mengubah h1 menjadi class agar bisa diganti di bagian header */
             color: #bb86fc; 
             text-align: center;
             margin-bottom: 20px; 
@@ -134,14 +134,14 @@
         }
         
         /* ====================================
-           1.1. CSS BARU UNTUK GIF DI ATAS
+           1.1. CSS BARU UNTUK GIF DI ATAS (SEBAGAI LOGO)
            ==================================== */
         .header-gif {
             display: block; 
             width: 100%; 
-            max-width: 150px; /* **INI PENGATURAN UKURAN LOGO/GIF ANDA** */
+            max-width: 150px; 
             height: auto;
-            margin: 0 auto 20px auto; 
+            margin: 0 auto 10px auto; /* Mengurangi margin bawah sedikit */
             border-radius: 5px;
         }
 
@@ -326,9 +326,9 @@
 
     <div class="container">
         
-        <img src="mguPwiip.gif" alt="Logo OVO99 Berkedip" class="header-gif">
+        <img src="mguPwiip.gif" alt="" class="header-gif">
 
-        <h1>DATA BASE OVO99</h1>
+        <p class="main-title">DATA BASE OVO99</p> 
 
         <div class="balance-card">
             <span class="card-title">JUMLAH SALDO SAAT INI</span>
@@ -516,5 +516,4 @@
     </script>
 
 </body>
-    </html>
-        
+</html>
