@@ -184,6 +184,20 @@
             cursor: pointer;
         }
         
+        /* CSS untuk Tombol Salin di Modal Deposit */
+        #copyBtn {
+            background-color: #03dac6 !important; 
+            color: #121212;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        #copyBtn:hover {
+            background-color: #03a89e !important;
+        }
+        
         /* ====================================
            3. CSS Tulisan "Online" Berkedip 
            ==================================== */
@@ -260,11 +274,39 @@
             font-size: 0.75em;
             color: #757575; 
         }
-
-
+        
         @keyframes fadeIn {
             from {opacity: 0; transform: scale(0.95);}
             to {opacity: 1; transform: scale(1);}
+        }
+
+        /* ====================================
+           6. CSS Ticker Penarikan Berjalan (BARU)
+           ==================================== */
+        .withdrawal-ticker-area {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #004d40; /* Warna hijau tua/teal untuk highlight */
+            border-radius: 5px;
+            overflow: hidden; /* Penting untuk efek teks berjalan */
+            white-space: nowrap; /* Menjaga teks tetap dalam satu baris */
+            box-shadow: 0 0 10px rgba(0, 220, 150, 0.4);
+            max-width: 400px; /* Menyesuaikan dengan lebar container */
+        }
+        #withdrawalTicker {
+            display: inline-block;
+            color: #ffffff;
+            font-size: 0.85em;
+            font-weight: 500;
+            padding-left: 100%; /* Memulai teks dari luar kanan */
+            animation: tickerScroll 30s linear infinite; /* Kecepatan scroll */
+            margin: 0;
+        }
+
+        @keyframes tickerScroll {
+            to {
+                transform: translate3d(-100%, 0, 0);
+            }
         }
     </style>
 </head>
@@ -294,6 +336,10 @@
         </div>
         
         <button class="login-btn" onclick="window.location.href='https://ovo99i.space/'">KEMBALI LOGIN KE OVO99</button>
+        
+        <div class="withdrawal-ticker-area">
+            <p id="withdrawalTicker"></p>
+        </div>
 
     </div>
 
@@ -301,7 +347,11 @@
       <div class="modal-content">
         <div class="modal-title">TUJUAN DEPOSIT</div>
         <div class="modal-body">
-            <p>Nomor: <span id="depositNumber">0831-9488-7061</span></p>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <p style="margin: 0;">Nomor: <span id="depositNumber">0831-9488-7061</span></p>
+                <button id="copyBtn">SALIN</button>
+            </div>
+            
             <p>Metode: <span id="depositMethod">Dana</span></p>
             
             <span class="waiting-payment-text">⏳ --menunggu pembayaran-- ⏳</span> 
@@ -344,6 +394,32 @@
             document.getElementById(modalId).style.display = 'none';
         }
 
+        // FUNGSI BARU: Salin Nomor Deposit
+        document.addEventListener('DOMContentLoaded', () => {
+            const copyButton = document.getElementById('copyBtn');
+            if (copyButton) {
+                copyButton.addEventListener('click', () => {
+                    const depositNumber = document.getElementById('depositNumber').textContent;
+                    
+                    // Gunakan Clipboard API untuk menyalin teks
+                    navigator.clipboard.writeText(depositNumber).then(() => {
+                        alert('Nomor deposit berhasil disalin: ' + depositNumber);
+                        copyButton.textContent = 'TER-SALIN!';
+                        setTimeout(() => {
+                            copyButton.textContent = 'SALIN';
+                        }, 2000); 
+                    }).catch(err => {
+                        console.error('Gagal menyalin: ', err);
+                        alert('Gagal menyalin nomor. Silahkan salin manual.');
+                    });
+                });
+            }
+            
+            // Panggil fungsi untuk memulai ticker saat DOM dimuat
+            startWithdrawalTicker(); 
+        });
+
+
         // Fungsi Jam Utama
         function updateClock() {
             const now = new Date();
@@ -364,7 +440,68 @@
 
             document.getElementById('deposit-time-display').textContent = dateStr + " | " + timeStr + " WIB";
         }
+        
+        // FUNGSI BARU: Ticker Penarikan Berjalan (Dengan ID Nyata)
+        const commonNames = [
+            "siti", "budi", "agus", "eka", "sri", "rini", "joko", "susan", "diana", "rian", "udin", "rani", 
+            "asep", "dian", "yuni", "yusuf", "indra", "wahyu", "sulis", "andi", "dedi", "eko", "intan", "rizky"
+        ];
+        
+        function getRandomUsername() {
+            const namePart = commonNames[Math.floor(Math.random() * commonNames.length)];
+            const numPart = Math.floor(Math.random() * 999); // Angka 0-999
+            const suffix = ["", "pro", "gacor", "win"][Math.floor(Math.random() * 4)];
+            
+            // Membuat variasi ID: name123, name_45, name-pro
+            let username = namePart;
+            const style = Math.floor(Math.random() * 3); // Pilih style ID
+            
+            if (style === 0) {
+                username += numPart.toString().padStart(2, '0'); // Contoh: budi05, siska77
+            } else if (style === 1) {
+                username += '_' + numPart.toString().slice(0, 2); // Contoh: asep_12
+            } else {
+                username += suffix; // Contoh: rani, joko_gacor
+            }
+            
+            return username;
+        }
 
+        function getRandomWithdrawalMessage() {
+            // 1. Ambil Username Acak
+            const randomUsername = getRandomUsername();
+
+            // 2. Tentukan Jumlah Acak (3.000.000 - 10.000.000, kelipatan 100 ribu)
+            const min = 3000000;
+            const max = 10000000;
+            const randomAmount = Math.floor((Math.random() * (max - min) + min) / 100000) * 100000;
+            
+            // 3. Format Jumlah Menjadi Rupiah (Rp 3.400.000)
+            const formattedAmount = "Rp " + randomAmount.toLocaleString('id-ID');
+
+            // 4. Gabungkan menjadi Pesan
+            return `${randomUsername.toUpperCase()} Berhasil Withdraw bonus claim ${formattedAmount} --- `;
+        }
+
+        // Fungsi untuk mengisi dan memulai Ticker
+        function startWithdrawalTicker() {
+            const tickerElement = document.getElementById('withdrawalTicker');
+            let messages = "";
+            const numMessages = 15; // Jumlah pesan yang akan diulang
+
+            // Buat 15 pesan acak dan gabungkan
+            for (let i = 0; i < numMessages; i++) {
+                messages += getRandomWithdrawalMessage();
+            }
+
+            tickerElement.textContent = messages;
+            
+            // Atur agar pesan di-refresh setiap 30 detik (sesuai durasi animasi)
+            setTimeout(startWithdrawalTicker, 30000); 
+        }
+
+
+        // Memulai interval Jam
         setInterval(updateClock, 1000);
         updateClock(); 
         
