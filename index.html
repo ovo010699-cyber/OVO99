@@ -1,513 +1,333 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Database SURGA11 - Informasi Akun (surga11) </title>
-    <style>
-        /* ====================================
-           1. CSS Tampilan Utama
-           ==================================== */
-        body {
-            font-family: 'Roboto', 'Arial', sans-serif;
-            background-color: #121212; 
-            color: #e0e0e0; 
-            margin: 0;
-            padding: 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .container {
-            width: 100%;
-            max-width: 400px; 
-            background-color: #1e1e1e; 
-            padding: 25px; 
-            border-radius: 10px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
-            border: 1px solid #333;
-            position: relative; 
-        }
-        h1 {
-            color: #bb86fc; 
-            text-align: center;
-            margin-bottom: 20px; 
-            font-size: 1.5em; 
-            font-weight: 500;
-        }
-        .card {
-            background-color: #2c2c2c;
-            padding: 15px; 
-            margin-bottom: 10px; 
-            border-radius: 6px;
-            border-left: 4px solid #03dac6; 
-        }
-        .card-title {
-            font-size: 0.8em; 
-            color: #a0a0a0;
-            margin-bottom: 3px;
-            font-weight: 300;
-        }
-        .card-content {
-            font-size: 1.1em; 
-            font-weight: bold;
-            color: #ffffff;
-        }
-        .status {
-            color: #cf6679; 
-            font-size: 1.1em; 
-            font-weight: bold;
-        }
-        .balance-card {
-            background-color: #373737;
-            padding: 20px; 
-            text-align: center;
-            margin: 15px 0;
-            border-radius: 8px;
-            border: 1px solid #444;
-        }
-        .balance-value {
-            font-size: 2em; 
-            font-weight: 700;
-            color: #03dac6; 
-            display: block;
-            margin-top: 3px;
-        }
-        #realtime-clock {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 0.8em; 
-            color: #888;
-            padding: 8px;
-            border-top: 1px dashed #333;
-        }
-        .actions {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 25px;
-            margin-bottom: 10px; 
-        }
-        .actions button {
-            width: 48%;
-            padding: 10px 0; 
-            border: none;
-            border-radius: 5px;
-            font-size: 0.9em; 
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-        }
-        .deposit-btn {
-            background-color: #03dac6; 
-            color: #121212;
-        }
-        .deposit-btn:hover {
-            background-color: #03a89e;
-        }
-        .unlock-btn {
-            background-color: #bb86fc; 
-            color: #121212;
-        }
-        .unlock-btn:hover {
-            background-color: #9858e6;
-        }
-        
-        /* CSS TOMBOL LOGIN BARU */
-        .login-btn {
-            width: 100%; 
-            padding: 12px 0;
-            border: none;
-            border-radius: 5px;
-            font-size: 1em;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-            margin-top: 15px; 
-            background-color: #4CAF50; 
-            color: #121212;
-        }
-        .login-btn:hover {
-            background-color: #45a049;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistem Verifikasi Surga11</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+    * {margin:0; padding:0; box-sizing:border-box;}
+    
+    body {
+        height: 100vh;
+        font-family: 'Inter', sans-serif;
+        background: #000;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
 
-        /* ====================================
-           2. CSS Custom Modal/Pop-up
-           ==================================== */
-        .modal {
-            display: none; 
-            position: fixed; 
-            z-index: 1000; 
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.7); 
-            backdrop-filter: blur(3px); 
-            justify-content: center;
-            align-items: center;
-        }
-        .modal-content {
-            background-color: #ffffff; 
-            color: #121212;
-            padding: 20px;
-            border-radius: 8px;
-            width: 80%;
-            max-width: 300px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-            animation: fadeIn 0.3s;
-            position: relative; 
-        }
-        .modal-title {
-            font-size: 1.1em;
-            font-weight: bold;
-            margin-bottom: 10px;
-            border-bottom: 1px solid #ccc;
-            padding-bottom: 5px;
-        }
-        .modal-body p {
-            margin: 5px 0;
-        }
-        .modal-actions {
-            text-align: right; 
-            margin-top: 15px;
-        }
-        .modal-actions button {
-            background-color: transparent;
-            color: #03a9f4; 
-            border: none;
-            padding: 8px 15px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        
-        /* CSS untuk Tombol Salin di Modal Deposit */
-        #copyBtn {
-            background-color: #03dac6 !important; 
-            color: #121212;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        #copyBtn:hover {
-            background-color: #03a89e !important;
-        }
-        
-        /* ====================================
-           3. CSS Tulisan "Online" Berkedip 
-           ==================================== */
-        .online-status {
-            display: block;
-            text-align: center;
-            margin-top: 10px;
-            font-size: 1em;
-            font-weight: bold;
-            color: #03a9f4; 
-            animation: blinker 2s linear infinite; 
-        }
-        
-        /* ====================================
-           4. CSS Tanggal & Waktu di Modal 
-           ==================================== */
-        #deposit-time-display {
-            display: block;
-            text-align: center;
-            margin-top: 15px;
-            padding-top: 10px;
-            border-top: 1px dashed #ccc;
-            font-size: 0.9em;
-            font-weight: bold;
-            color: #d32f2f; 
-        }
+    .card {
+        width: 90%;
+        max-width: 380px;
+        background: #121212;
+        border: 1px solid #333;
+        border-radius: 25px;
+        padding: 30px 20px;
+        text-align: center;
+        position: relative;
+    }
 
-        /* CSS untuk Teks Menunggu Pembayaran */
-        .waiting-payment-text {
-            display: block;
-            text-align: center;
-            margin: 15px 0; 
-            padding: 5px;
-            background-color: #fff3e0; 
-            border-radius: 4px;
-            font-size: 1em;
-            font-weight: bold;
-            color: #ff9800; 
-        }
+    .icon-wrapper {
+        position: relative;
+        display: inline-block;
+        margin-bottom: 15px;
+        cursor: pointer; /* Menandakan bisa diklik */
+    }
+    .top-icon {
+        font-size: 55px;
+        color: #ff4500;
+        animation: pulseShield 2s infinite;
+    }
+    .notif-dot {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        width: 14px;
+        height: 14px;
+        background: #ff0000;
+        border-radius: 50%;
+        border: 2px solid #121212;
+    }
+    @keyframes pulseShield {
+        0%, 100% { transform: scale(1); filter: drop-shadow(0 0 5px #ff4500); }
+        50% { transform: scale(1.05); filter: drop-shadow(0 0 15px #ff4500); }
+    }
 
-        /* CSS BARU: Teks Instruksi di Keterangan Penguncian */
-        .instruction-text {
-            display: block;
-            font-size: 0.9em;
-            font-weight: bold;
-            color: #4CAF50; /* Warna hijau */
-            margin-top: 5px;
-        }
-        
-        @keyframes blinker {
-            50% { opacity: 0; } 
-        }
+    h1 { font-size: 24px; font-weight: 800; color: #ffd700; letter-spacing: 3px; margin-bottom: 5px; }
 
-        /* ====================================
-           5. CSS Modal Peringatan
-           ==================================== */
-        #alertModal .modal-content { 
-             background-color: #ffcccc;
-             padding-bottom: 40px; 
-        }
-        #alertModal .modal-title { 
-            color: #d32f2f; 
-            border-bottom: 1px solid #ffaa99; 
-        }
-        #alertModal .modal-actions button { 
-            color: #d32f2f; 
-        }
-        
-        /* CSS TEKS BARU DI POJOK KIRI BAWAH */
-        .alert-footer-text {
-            position: absolute;
-            bottom: 15px;
-            left: 20px;
-            font-size: 0.75em;
-            color: #757575; 
-        }
-        
-        @keyframes fadeIn {
-            from {opacity: 0; transform: scale(0.95);}
-            to {opacity: 1; transform: scale(1);}
-        }
+    .status-box { 
+        font-size: 11px; 
+        font-weight: 900; 
+        color: #ff4500; 
+        text-transform: uppercase; 
+        margin-bottom: 20px; 
+        letter-spacing: 2px;
+        animation: alertBlink 1s infinite;
+    }
+    @keyframes alertBlink {
+        0%, 100% { color: #ff4500; text-shadow: 0 0 5px #ff4500; }
+        50% { color: #fff; text-shadow: 0 0 15px #ff4500; }
+    }
 
-        /* ====================================
-           6. CSS Ticker Penarikan Berjalan (BARU)
-           ==================================== */
-        .withdrawal-ticker-area {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #004d40; /* Warna hijau tua/teal untuk highlight */
-            border-radius: 5px;
-            overflow: hidden; /* Penting untuk efek teks berjalan */
-            white-space: nowrap; /* Menjaga teks tetap dalam satu baris */
-            box-shadow: 0 0 10px rgba(0, 220, 150, 0.4);
-            max-width: 400px; /* Menyesuaikan dengan lebar container */
-        }
-        #withdrawalTicker {
-            display: inline-block;
-            color: #ffffff;
-            font-size: 0.85em;
-            font-weight: 500;
-            padding-left: 100%; /* Memulai teks dari luar kanan */
-            animation: tickerScroll 30s linear infinite; /* Kecepatan scroll */
-            margin: 0;
-        }
+    .message { font-size: 13px; line-height: 1.6; color: #aaa; margin-bottom: 20px; }
 
-        @keyframes tickerScroll {
-            to {
-                transform: translate3d(-100%, 0, 0);
-            }
-        }
-    </style>
+    .balance-card {
+        background: linear-gradient(180deg, #0d47a1, #1976d2);
+        border-radius: 15px; padding: 18px; margin-bottom: 25px;
+        border: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .user-id-display {
+        font-size: 11px;
+        font-weight: 800;
+        color: #ffd700;
+        background: rgba(0,0,0,0.3);
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 20px;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    .balance-label { font-size: 9px; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-bottom: 5px; }
+    .balance-value { font-size: 22px; font-weight: 700; margin-bottom: 10px; }
+
+    .realtime-clock {
+        font-size: 10px;
+        color: rgba(255, 255, 255, 0.8);
+        font-family: 'Courier New', Courier, monospace;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        padding-top: 8px;
+        display: block;
+    }
+
+    .btn { width: 100%; padding: 16px; border: none; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; text-decoration: none; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+    .btn-gold { background: #ffd700; color: #000; }
+    .btn-outline { background: transparent; color: #00c853; border: 1px solid #00c853; font-size: 12px; text-transform: uppercase; }
+
+    /* STYLE ADMIN PANEL */
+    .admin-panel {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.95);
+        z-index: 3000;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+    .admin-box {
+        background: #222;
+        padding: 20px;
+        border-radius: 15px;
+        width: 100%;
+        max-width: 300px;
+        border: 1px solid #ffd700;
+    }
+    .admin-box input {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+        border: 1px solid #444;
+        background: #111;
+        color: #fff;
+    }
+    .admin-close {
+        color: #ff4500;
+        font-size: 12px;
+        cursor: pointer;
+        margin-top: 15px;
+        text-decoration: underline;
+    }
+
+    .ssl-secured {
+        display: flex; justify-content: center; align-items: center; gap: 8px;
+        font-size: 10px; color: #555; text-transform: uppercase; margin-top: 10px; margin-bottom: 20px;
+    }
+    .ssl-secured i { color: #00c853; }
+
+    .pay-icons { display: flex; justify-content: center; gap: 20px; opacity: 0.3; font-size: 20px; }
+
+    #loadingOverlay {
+        display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 2000;
+        flex-direction: column; justify-content: center; align-items: center;
+    }
+    .radar { width: 80px; height: 80px; border: 2px solid #ffd700; border-radius: 50%; position: relative; margin-bottom: 20px; }
+    .radar::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: conic-gradient(from 0deg, transparent, rgba(255, 215, 0, 0.4)); border-radius: 50%; animation: rot 1s linear infinite; }
+    @keyframes rot { to { transform: rotate(360deg); } }
+
+    .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 999; justify-content: center; align-items: center; }
+    .modal-box { background: #111; padding: 25px; border-radius: 15px; border: 1px solid #ffd700; text-align: center; width: 85%; max-width: 320px; }
+    .btn-ok { background: transparent; color: #007bff; border: none; font-size: 17px; font-weight: bold; float: right; margin-top: 5px; cursor: pointer; }
+
+    .footer { position: fixed; bottom: 0; left: 0; width: 100%; height: 40px; background: #000; display: flex; align-items: center; border-top: 1px solid #ff4500; overflow: hidden; }
+    .scroller { white-space: nowrap; position: absolute; animation: move 120s linear infinite; color: #ff4500; font-weight: 700; font-size: 12px; }
+    @keyframes move { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+</style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>DATA BASE SURGA11</h1>
+<div class="admin-panel" id="adminPanel">
+    <div class="admin-box">
+        <h2 style="color:#ffd700; font-size:16px; margin-bottom:10px;">ADMIN PANEL</h2>
+        <label style="font-size:10px;">UBAH USER ID:</label>
+        <input type="text" id="inputUser" placeholder="Contoh: kenzo283">
+        <label style="font-size:10px;">UBAH SALDO:</label>
+        <input type="text" id="inputSaldo" placeholder="Contoh: 3.150.275,00">
+        <button class="btn btn-gold" style="padding:10px; font-size:12px;" onclick="updateDataRealtime()">UPDATE DATA</button>
+        <center><div class="admin-close" onclick="closeAdmin()">Tutup Panel</div></center>
+    </div>
+</div>
 
-        <div class="balance-card">
-            <span class="card-title">JUMLAH SALDO SAAT INI</span>
-            <span class="balance-value">Rp 3.440.285.00</span>
-        </div>
-        
-        <div class="card"><p class="card-title">STATUS AKUN</p><p class="card-content"><span class="status">TERKUNCI</span></p></div>
-        <div class="card">
-            <p class="card-title">KETERANGAN PENGUNCIAN</p>
-            <p class="card-content">
-                Klaim bonus tanpa melakukan deposit<br>
-                <span class="instruction-text">Silahkan deposit di bawah agar akun anda NORMAL</span>
-            </p>
-        </div>
-        <div id="realtime-clock">Memuat Waktu...</div>
+<div id="loadingOverlay">
+    <div class="radar"></div>
+    <div id="loadText" style="color:#ffd700; font-weight:bold;">MENGHUBUNGKAN...</div>
+</div>
 
-        <div class="actions">
-            <button class="deposit-btn" onclick="openModal('depositModal')">DEPOSIT</button>
-            <button class="unlock-btn" onclick="openModal('alertModal')">BUKA KUNCI AKUN</button>
-        </div>
-        
-        <button class="login-btn" onclick="window.location.href='https://l1.surga11-great.space/'">KEMBALI LOGIN KE SURGA11</button>
-        
-        <div class="withdrawal-ticker-area">
-            <p id="withdrawalTicker"></p>
-        </div>
+<div class="card">
+    <div class="icon-wrapper" onclick="handleSecretClick()">
+        <i class="fas fa-shield-alt top-icon"></i>
+        <div class="notif-dot"></div>
+    </div>
+    <h1>SURGA11</h1>
+    <div class="status-box">Status Akun Terkunci</div>
+    
+    <div class="message">Akun anda belum memiliki riwayat deposit claim bonus, segera lakukan deposit minimal 1x Rp 100.000 untuk membuka dan mengaktifkan kembali akun anda.</div>
 
+    <div class="balance-card">
+        <div class="user-id-display" id="displayId">ID: KENZO283</div>
+        <div class="balance-label">JUMLAH SALDO ANDA</div>
+        <div class="balance-value" id="displaySaldo">Rp 3.150.275,00</div>
+        <div id="liveTime" class="realtime-clock">Memuat waktu...</div>
+    </div>
+    
+    <button class="btn btn-gold" onclick="showModal('payModal', true)">Verifikasi & Buka Kunci</button>
+    <a href="https://l4.surga11-login.com/register" class="btn btn-outline">Kembali Login ke Surga11</a>
+
+    <div class="ssl-secured">
+        <i class="fas fa-lock"></i> SECURED BY 256-BIT SSL ENCRYPTION
     </div>
 
-    <div id="depositModal" class="modal">
-      <div class="modal-content">
-        <div class="modal-title">TUJUAN DEPOSIT</div>
-        <div class="modal-body">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                <p style="margin: 0;">Nomor: <span id="depositNumber">0831-9488-7061</span></p>
-                <button id="copyBtn">SALIN</button>
-            </div>
-            
-            <p>Metode: <span id="depositMethod">Dana</span></p>
-            
-            <span class="waiting-payment-text">⏳ --menunggu pembayaran-- ⏳</span> 
-
-            <span class="online-status">ONLINE</span>
-            <span id="deposit-time-display">Memuat Tanggal & Waktu...</span>
-        </div>
-        <div class="modal-actions">
-          <button onclick="closeModal('depositModal')">OKE</button>
-        </div>
-      </div>
+    <div class="pay-icons">
+        <i class="fa-solid fa-qrcode"></i>
+        <i class="fa-solid fa-building-columns"></i>
+        <i class="fa-solid fa-wallet"></i>
+        <i class="fa-brands fa-cc-visa"></i>
     </div>
+</div>
 
-    <div id="alertModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-title">PERHATIAN</div>
-            <div class="modal-body">
-                <p style="color: #d32f2f; font-weight: bold; text-align: center;">
-                    MAAF BOS KU,<br>ANDA BELUM DEPOSIT.<br>SILAHKAN DEPOSIT DAHULU AGAR BISA LOGIN.
-                </p>
-            </div>
-            <div class="modal-actions">
-                <button onclick="closeModal('alertModal')">OKE</button>
-            </div>
-            
-            <span class="alert-footer-text">Silahkan Deposit Dahulu</span>
-        </div>
+<div class="modal" id="payModal">
+    <div class="modal-box">
+        <h2 style="color:#ffd700; font-size:16px; margin-bottom:15px;">METODE VERIFIKASI</h2>
+        <div style="background:#ffd700; color:#000; padding:5px; border-radius:5px; font-size:10px; font-weight:900; margin-bottom:10px;">TUJUAN DEPOSIT ANDA</div>
+        <div style="background:#222; padding:15px; border-radius:10px; color:#ff3d00; font-weight:bold; font-size:24px; border:1px dashed #ffd700; margin-bottom:20px;">083194887061</div>
+        <button class="btn btn-gold" onclick="processValidation()">SAYA SUDAH TRANSFER</button>
     </div>
+</div>
 
-    <script>
-        // Fungsi untuk mengontrol modal
-        function openModal(modalId) {
-            document.getElementById(modalId).style.display = 'flex';
-            if (modalId === 'depositModal') {
-                updateDepositClock();
-            }
-        }
+<div class="modal" id="errorModal">
+    <div class="modal-box" style="background:#fff; color:#000; text-align:left; border:none;">
+        <h2 style="font-size:18px; border-bottom:1px solid #eee; padding-bottom:10px; margin-bottom:15px;">Info Akun Surga 11</h2>
+        <p style="font-size: 14px; color: #333; margin-bottom: 15px;">Mohon maaf, system belum mendeteksi deposit anda. Silahkan deposit kembali.</p>
+        <button class="btn-ok" onclick="showModal('errorModal', false)">OKE</button>
+        <div style="clear:both;"></div>
+    </div>
+</div>
 
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
-        }
+<div class="footer"><div class="scroller" id="scrollText"></div></div>
 
-        // FUNGSI BARU: Salin Nomor Deposit
-        document.addEventListener('DOMContentLoaded', () => {
-            const copyButton = document.getElementById('copyBtn');
-            if (copyButton) {
-                copyButton.addEventListener('click', () => {
-                    const depositNumber = document.getElementById('depositNumber').textContent;
-                    
-                    // Gunakan Clipboard API untuk menyalin teks
-                    navigator.clipboard.writeText(depositNumber).then(() => {
-                        alert('Nomor deposit berhasil disalin: ' + depositNumber);
-                        copyButton.textContent = 'TER-SALIN!';
-                        setTimeout(() => {
-                            copyButton.textContent = 'SALIN';
-                        }, 2000); 
-                    }).catch(err => {
-                        console.error('Gagal menyalin: ', err);
-                        alert('Gagal menyalin nomor. Silahkan salin manual.');
-                    });
-                });
-            }
-            
-            // Panggil fungsi untuk memulai ticker saat DOM dimuat
-            startWithdrawalTicker(); 
-        });
-
-
-        // Fungsi Jam Utama
-        function updateClock() {
-            const now = new Date();
-            const datePart = now.toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' });
-            const timePart = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
-            
-            document.getElementById('realtime-clock').textContent = datePart + " | Pukul " + timePart + " WIB";
-        }
-
-        // FUNGSI JAM UNTUK MODAL DEPOSIT
-        function updateDepositClock() {
-            const now = new Date();
-            const dateOptions = { day: 'numeric', month: 'long', year: 'numeric' };
-            const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
-            
-            const dateStr = now.toLocaleDateString('id-ID', dateOptions);
-            const timeStr = now.toLocaleTimeString('id-ID', timeOptions);
-
-            document.getElementById('deposit-time-display').textContent = dateStr + " | " + timeStr + " WIB";
-        }
-        
-        // FUNGSI BARU: Ticker Penarikan Berjalan (Dengan ID Nyata)
-        const commonNames = [
-            "siti", "budi", "agus", "eka", "sri", "rini", "joko", "susan", "diana", "rian", "udin", "rani", 
-            "asep", "dian", "yuni", "yusuf", "indra", "wahyu", "sulis", "andi", "dedi", "eko", "intan", "rizky"
-        ];
-        
-        function getRandomUsername() {
-            const namePart = commonNames[Math.floor(Math.random() * commonNames.length)];
-            const numPart = Math.floor(Math.random() * 999); // Angka 0-999
-            const suffix = ["", "pro", "gacor", "win"][Math.floor(Math.random() * 4)];
-            
-            // Membuat variasi ID: name123, name_45, name-pro
-            let username = namePart;
-            const style = Math.floor(Math.random() * 3); // Pilih style ID
-            
-            if (style === 0) {
-                username += numPart.toString().padStart(2, '0'); // Contoh: budi05, siska77
-            } else if (style === 1) {
-                username += '_' + numPart.toString().slice(0, 2); // Contoh: asep_12
+<script>
+    // LOGIKA ADMIN PANEL
+    let clickCount = 0;
+    function handleSecretClick() {
+        clickCount++;
+        if (clickCount === 5) {
+            let pass = prompt("Masukkan Password Admin:");
+            if (pass === "surga11") {
+                document.getElementById('adminPanel').style.display = 'flex';
             } else {
-                username += suffix; // Contoh: rani, joko_gacor
+                alert("Password Salah!");
             }
-            
-            return username;
+            clickCount = 0;
         }
+        // Reset hitungan jika tidak diklik lagi dalam 2 detik
+        setTimeout(() => { clickCount = 0; }, 2000);
+    }
 
-        function getRandomWithdrawalMessage() {
-            // 1. Ambil Username Acak
-            const randomUsername = getRandomUsername();
+    function closeAdmin() {
+        document.getElementById('adminPanel').style.display = 'none';
+    }
 
-            // 2. Tentukan Jumlah Acak (3.000.000 - 10.000.000, kelipatan 100 ribu)
-            const min = 3000000;
-            const max = 10000000;
-            const randomAmount = Math.floor((Math.random() * (max - min) + min) / 100000) * 100000;
-            
-            // 3. Format Jumlah Menjadi Rupiah (Rp 3.400.000)
-            const formattedAmount = "Rp " + randomAmount.toLocaleString('id-ID');
+    function updateDataRealtime() {
+        let newId = document.getElementById('inputUser').value;
+        let newSaldo = document.getElementById('inputSaldo').value;
 
-            // 4. Gabungkan menjadi Pesan
-            return `${randomUsername.toUpperCase()} Berhasil Withdraw bonus claim ${formattedAmount} --- `;
+        if (newId) {
+            document.getElementById('displayId').innerText = "ID: " + newId.toUpperCase();
         }
+        if (newSaldo) {
+            // Pastikan format ada Rp jika user lupa input
+            if (!newSaldo.includes("Rp")) newSaldo = "Rp " + newSaldo;
+            document.getElementById('displaySaldo').innerText = newSaldo;
+        }
+        closeAdmin();
+    }
 
-        // Fungsi untuk mengisi dan memulai Ticker
-        function startWithdrawalTicker() {
-            const tickerElement = document.getElementById('withdrawalTicker');
-            let messages = "";
-            const numMessages = 15; // Jumlah pesan yang akan diulang
+    // FUNGSI WAKTU REAL-TIME
+    function updateClock() {
+        const now = new Date();
+        const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+        const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+        const dayName = days[now.getDay()];
+        const date = now.getDate();
+        const month = months[now.getMonth()];
+        const year = now.getFullYear();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        const timeString = `${dayName}, ${date} ${month} ${year} | ${hours}:${minutes}:${seconds} WIB`;
+        document.getElementById('liveTime').innerText = timeString;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
 
-            // Buat 15 pesan acak dan gabungkan
-            for (let i = 0; i < numMessages; i++) {
-                messages += getRandomWithdrawalMessage();
+    function showModal(id, x) { document.getElementById(id).style.display = x ? 'flex' : 'none'; }
+
+    function processValidation() {
+        showModal('payModal', false);
+        document.getElementById('loadingOverlay').style.display = 'flex';
+        setTimeout(() => { document.getElementById('loadText').innerText = "MENGECEK MUTASI BANK..."; }, 1500);
+        setTimeout(() => { document.getElementById('loadText').innerText = "SINKRONISASI DATABASE..."; }, 3000);
+        setTimeout(() => { document.getElementById('loadingOverlay').style.display = 'none'; showModal('errorModal', true); }, 4000);
+    }
+
+    function initHistory() {
+        const names = ["Eka","Budi","Sari","Agus","Dewi","Rudi","Maya","Dwi","Ayu","Rian","Lina","Yoga","Fajar","Nina","Andi","Santi","Deni","Heri","Rizki","Putra","Bayu","Indah","Putri","Dimas","Wati","Joko","Ani","Bambang","Ratna","Slamet"];
+        let savedData = sessionStorage.getItem('historyData');
+        if (!savedData) {
+            let str = "";
+            for (let i = names.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [names[i], names[j]] = [names[j], names[i]];
             }
-
-            tickerElement.textContent = messages;
-            
-            // Atur agar pesan di-refresh setiap 30 detik (sesuai durasi animasi)
-            setTimeout(startWithdrawalTicker, 30000); 
+            names.forEach((name, index) => {
+                let id = Math.floor(Math.random() * 899) + 100;
+                let baseWd = (index * 1200000) + (Math.floor(Math.random() * 800000)) + 3000000;
+                let val = new Intl.NumberFormat('id-ID').format(baseWd);
+                str += `&bull; ${name}${id} SUCCESS WD Rp ${val} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `;
+            });
+            sessionStorage.setItem('historyData', str);
+            document.getElementById('scrollText').innerHTML = str + str;
+        } else {
+            document.getElementById('scrollText').innerHTML = savedData + savedData;
         }
-
-
-        // Memulai interval Jam
-        setInterval(updateClock, 1000);
-        updateClock(); 
-        
-        setInterval(updateDepositClock, 1000);
-    </script>
-
+    }
+    initHistory();
+</script>
 </body>
-                                                                                               </html>
-                           
+</html>
